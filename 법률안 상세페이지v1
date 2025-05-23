@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law.GG - 의료법 일부개정법률안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* 헤더 */
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #333;
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* 통합 콘텐츠 */
+        .unified-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .full-width-section {
+            grid-column: 1 / -1;
+            border-top: 1px solid #e9ecef;
+            padding-top: 30px;
+        }
+
+        /* 왼쪽 메인 콘텐츠 */
+        .main-content {
+            /* 배경과 그림자 제거 - 통합 콘텐츠에서 처리 */
+        }
+
+        .bill-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .bill-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            width: 120px;
+            flex-shrink: 0;
+        }
+
+        .info-value {
+            color: #333;
+        }
+
+        .view-detail-btn {
+            background-color: #495057;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 30px;
+            transition: background-color 0.2s;
+        }
+
+        .view-detail-btn:hover {
+            background-color: #343a40;
+        }
+
+        /* 찬성/반대 버튼 */
+        .vote-section {
+            margin-bottom: 30px;
+        }
+
+        .vote-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .vote-btn {
+            padding: 15px 40px;
+            border: 2px solid;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 120px;
+        }
+
+        .vote-btn.agree {
+            border-color: #28a745;
+            color: #28a745;
+            background-color: white;
+        }
+
+        .vote-btn.agree:hover,
+        .vote-btn.agree.active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .vote-btn.disagree {
+            border-color: #dc3545;
+            color: #dc3545;
+            background-color: white;
+        }
+
+        .vote-btn.disagree:hover,
+        .vote-btn.disagree.active {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .vote-counts {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .vote-count {
+            text-align: center;
+            padding: 15px 20px;
+            border: 2px solid;
+            border-radius: 8px;
+            min-width: 100px;
+        }
+
+        .vote-count.agree {
+            border-color: #28a745;
+        }
+
+        .vote-count.disagree {
+            border-color: #dc3545;
+        }
+
+        .vote-count-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .vote-count-number {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .vote-count.agree .vote-count-label,
+        .vote-count.agree .vote-count-number {
+            color: #28a745;
+        }
+
+        .vote-count.disagree .vote-count-label,
+        .vote-count.disagree .vote-count-number {
+            color: #dc3545;
+        }
+
+        /* 댓글 섹션 */
+        .comments-section {
+            /* 기존 border-top과 padding-top 제거 */
+        }
+
+        .comments-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .comment-form {
+            margin-bottom: 30px;
+        }
+
+        .comment-input {
+            width: 100%;
+            min-height: 100px;
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: #495057;
+            box-shadow: 0 0 0 3px rgba(73, 80, 87, 0.1);
+        }
+
+        .comment-submit {
+            background-color: #495057;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            float: right;
+            transition: background-color 0.2s;
+        }
+
+        .comment-submit:hover {
+            background-color: #343a40;
+        }
+
+        .comment-submit:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .comments-list {
+            clear: both;
+        }
+
+        .comment-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+
+        .comment-item.reply {
+            margin-left: 40px;
+            padding-left: 20px;
+            border-left: 3px solid #e9ecef;
+            background-color: #f8f9fa;
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .comment-stance {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .comment-stance.agree {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .comment-stance.disagree {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .comment-time {
+            color: #6c757d;
+            font-size: 12px;
+        }
+
+        .comment-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .comment-action-btn {
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.2s;
+        }
+
+        .comment-action-btn:hover {
+            color: #495057;
+        }
+
+        .reply-form {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            display: none;
+        }
+
+        .reply-form.show {
+            display: block;
+        }
+
+        .reply-input {
+            width: 100%;
+            min-height: 60px;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            font-size: 13px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .reply-input:focus {
+            outline: none;
+            border-color: #495057;
+            box-shadow: 0 0 0 2px rgba(73, 80, 87, 0.1);
+        }
+
+        .reply-submit {
+            background-color: #495057;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .reply-submit:hover {
+            background-color: #343a40;
+        }
+
+        .reply-submit:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .reply-cancel {
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 13px;
+            cursor: pointer;
+            padding: 8px 16px;
+        }
+
+        .reply-cancel:hover {
+            color: #495057;
+        }
+
+        .vote-required-message {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        /* 오른쪽 사이드바 */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .bill-summary {
+            /* 배경과 그림자 제거 - 통합 콘텐츠에서 처리 */
+            padding: 25px;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .summary-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .summary-subtitle {
+            font-size: 13px;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .summary-section {
+            margin-bottom: 20px;
+        }
+
+        .summary-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .summary-section-title::after {
+            content: "▼";
+            font-size: 10px;
+            color: #6c757d;
+            margin-left: auto;
+        }
+
+        .summary-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .summary-list li {
+            font-size: 13px;
+            color: #495057;
+            margin-bottom: 6px;
+            padding-left: 8px;
+            position: relative;
+        }
+
+        .summary-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #6c757d;
+        }
+
+        .related-bills {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .related-bill-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .related-bill-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .related-bill-item:last-child {
+            border-bottom: none;
+        }
+
+        .related-bill-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .related-bill-meta {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .related-bill-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .related-bill-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .related-bill-item:last-child {
+            border-bottom: none;
+        }
+
+        .related-bill-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.3;
+        }
+
+        .related-bill-meta {
+            font-size: 12px;
+            color: #6c757d;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .unified-content {
+                padding: 20px;
+            }
+
+            .vote-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .vote-counts {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .bill-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="your-logo.png" alt="LAW.GG" class="logo-img">
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">국회의원</a>
+                <a href="#" class="nav-item">법률안</a>
+                <a href="#" class="nav-item">입법제안</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="container">
+        <!-- 통합 콘텐츠 -->
+        <div class="unified-content">
+            <!-- 왼쪽 메인 콘텐츠 -->
+            <div class="main-content">
+                <h1 class="bill-title">의료법 일부개정법률안</h1>
+                
+                <!-- 법률안 정보 -->
+                <div class="bill-info">
+                    <div class="info-row">
+                        <span class="info-label">의안 번호:</span>
+                        <span class="info-value">9421</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">위원회:</span>
+                        <span class="info-value">보건복지위원회</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">발의연월일:</span>
+                        <span class="info-value">2024. 5. 17.</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">대표발의자:</span>
+                        <span class="info-value">김영선</span>
+                    </div>
+                </div>
+
+                <button class="view-detail-btn">의안 상세</button>
+
+                <!-- 찬성/반대 투표 -->
+                <div class="vote-section">
+                    <div class="vote-buttons">
+                        <button class="vote-btn agree" data-vote="agree">찬성</button>
+                        <button class="vote-btn disagree" data-vote="disagree">반대</button>
+                    </div>
+                    
+                    <div class="vote-counts">
+                        <div class="vote-count agree">
+                            <div class="vote-count-label">찬성</div>
+                            <div class="vote-count-number" id="agree-count">4842</div>
+                        </div>
+                        <div class="vote-count disagree">
+                            <div class="vote-count-label">반대</div>
+                            <div class="vote-count-number" id="disagree-count">5033</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 댓글 섹션 -->
+                <div class="comments-section">
+                    <h2 class="comments-title">법안 토론</h2>
+                    
+                    <div class="comment-form">
+                        <div class="vote-required-message" id="vote-message" style="display: none;">
+                            댓글을 작성하려면 먼저 찬성 또는 반대를 선택해주세요.
+                        </div>
+                        <textarea 
+                            class="comment-input" 
+                            id="comment-input" 
+                            placeholder="법안에 대한 의견을 작성해주세요..."
+                            disabled
+                        ></textarea>
+                        <button class="comment-submit" id="comment-submit" disabled>댓글 작성</button>
+                    </div>
+
+                    <div class="comments-list" id="comments-list">
+                        <!-- 기존 댓글들 -->
+                        <div class="comment-item" data-comment-id="1">
+                            <div class="comment-header">
+                                <span class="comment-author">익명1</span>
+                                <span class="comment-stance agree">찬성</span>
+                                <span class="comment-time">20시간</span>
+                            </div>
+                            <div class="comment-content">정말 좋은 정책 같습니다.</div>
+                            <div class="comment-actions">
+                                <button class="comment-action-btn reply-btn" data-comment-id="1">답글</button>
+                            </div>
+                            <div class="reply-form" id="reply-form-1">
+                                <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
+                                <button class="reply-submit" data-parent-id="1">답글 작성</button>
+                                <button class="reply-cancel">취소</button>
+                            </div>
+                        </div>
+
+                        <!-- 대댓글 예시 -->
+                        <div class="comment-item reply" data-comment-id="2" data-parent-id="1">
+                            <div class="comment-header">
+                                <span class="comment-author">익명5</span>
+                                <span class="comment-stance agree">찬성</span>
+                                <span class="comment-time">19시간</span>
+                            </div>
+                            <div class="comment-content">@익명1 저도 동감합니다!</div>
+                            <div class="comment-actions">
+                                <button class="comment-action-btn reply-btn" data-comment-id="2">답글</button>
+                            </div>
+                            <div class="reply-form" id="reply-form-2">
+                                <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
+                                <button class="reply-submit" data-parent-id="1">답글 작성</button>
+                                <button class="reply-cancel">취소</button>
+                            </div>
+                        </div>
+
+                        <div class="comment-item" data-comment-id="3">
+                            <div class="comment-header">
+                                <span class="comment-author">익명2</span>
+                                <span class="comment-stance agree">찬성</span>
+                                <span class="comment-time">6시간</span>
+                            </div>
+                            <div class="comment-content">응니다.</div>
+                            <div class="comment-actions">
+                                <button class="comment-action-btn reply-btn" data-comment-id="3">답글</button>
+                            </div>
+                            <div class="reply-form" id="reply-form-3">
+                                <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
+                                <button class="reply-submit" data-parent-id="3">답글 작성</button>
+                                <button class="reply-cancel">취소</button>
+                            </div>
+                        </div>
+
+                        <div class="comment-item" data-comment-id="4">
+                            <div class="comment-header">
+                                <span class="comment-author">익명3</span>
+                                <span class="comment-stance disagree">반대</span>
+                                <span class="comment-time">3시간</span>
+                            </div>
+                            <div class="comment-content">이 법률은 조금 더 검토해 보세요.</div>
+                            <div class="comment-actions">
+                                <button class="comment-action-btn reply-btn" data-comment-id="4">답글</button>
+                            </div>
+                            <div class="reply-form" id="reply-form-4">
+                                <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
+                                <button class="reply-submit" data-parent-id="4">답글 작성</button>
+                                <button class="reply-cancel">취소</button>
+                            </div>
+                        </div>
+
+                        <div class="comment-item" data-comment-id="5">
+                            <div class="comment-header">
+                                <span class="comment-author">익명4</span>
+                                <span class="comment-stance disagree">반대</span>
+                                <span class="comment-time">23분</span>
+                            </div>
+                            <div class="comment-content">개정하기로 크게 부처님 업무가 깊어질 것 같아요.</div>
+                            <div class="comment-actions">
+                                <button class="comment-action-btn reply-btn" data-comment-id="5">답글</button>
+                            </div>
+                            <div class="reply-form" id="reply-form-5">
+                                <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
+                                <button class="reply-submit" data-parent-id="5">답글 작성</button>
+                                <button class="reply-cancel">취소</button>
+                            </div>
+                        </div>
+
+                        <!-- 더보기 버튼 -->
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button style="background-color: #4285f4; color: white; border: none; padding: 10px 30px; border-radius: 6px; cursor: pointer;">더보기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 오른쪽 사이드바 -->
+            <div class="sidebar">
+                <!-- 조문의 의안 요약 -->
+                <div class="bill-summary">
+                    <div class="summary-title">조문의 의안</div>
+                    <div class="summary-subtitle">(제안배경과)</div>
+                    
+                    <div class="summary-section">
+                        <div class="summary-section-title">관련 법률안</div>
+                        <ul class="summary-list">
+                            <li>아동복지시설 일부개정법률안</li>
+                            <li>가족돌봄등을 위한 휴식 지원 관련 법률안</li>
+                            <li>영유아보육법 일부개정법률안</li>
+                            <li>국민기초생활 일부개정법률안</li>
+                            <li>감염병의 예방 및 관리에 관한 법률 일부개정법률안</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // API 설정
+        const API_CONFIG = {
+            baseUrl: 'https://open.assembly.go.kr/portal/openapi/nzmimeepazxkubdpn',
+            key: '69e4e44944d642599c407265cef3443b',
+            age: '22' // 22대 국회
+        };
+
+        // 현재 법률안 정보
+        let currentBill = {
+            id: null,
+            number: '',
+            name: '',
+            committee: '',
+            proposeDate: '',
+            proposer: '',
+            detailLink: ''
+        };
+
+        // API에서 법률안 상세 정보 가져오기
+        async function fetchBillDetail(billId) {
+            try {
+                const params = {
+                    Key: API_CONFIG.key,
+                    Type: 'json',
+                    pIndex: 1,
+                    pSize: 1,
+                    AGE: API_CONFIG.age,
+                    BILL_ID: billId
+                };
+                
+                const queryString = new URLSearchParams(params).toString();
+                const response = await fetch(`${API_CONFIG.baseUrl}?${queryString}`);
+                const data = await response.json();
+                
+                if (data.nzmimeepazxkubdpn && data.nzmimeepazxkubdpn[1] && data.nzmimeepazxkubdpn[1].row) {
+                    const bill = data.nzmimeepazxkubdpn[1].row[0];
+                    return {
+                        id: bill.BILL_ID,
+                        number: bill.BILL_NO,
+                        name: bill.BILL_NAME,
+                        committee: bill.COMMITTEE,
+                        proposeDate: bill.PROPOSE_DT ? bill.PROPOSE_DT.substring(0, 10).replace(/-/g, '. ') + '.' : '',
+                        proposer: bill.RST_PROPOSER || bill.PROPOSER || '',
+                        detailLink: bill.DETAIL_LINK || ''
+                    };
+                }
+                return null;
+            } catch (error) {
+                console.error('법률안 상세 정보 가져오기 실패:', error);
+                return null;
+            }
+        }
+
+        // 법률안 정보를 화면에 업데이트
+        function updateBillInfo(bill) {
+            // 제목 업데이트
+            document.querySelector('.bill-title').textContent = bill.name;
+            
+            // 법률안 정보 업데이트
+            document.querySelector('.info-row:nth-child(1) .info-value').textContent = bill.number;
+            document.querySelector('.info-row:nth-child(2) .info-value').textContent = bill.committee;
+            document.querySelector('.info-row:nth-child(3) .info-value').textContent = bill.proposeDate;
+            
+            // 대표발의자 정보 추가 (현재 3개만 있으므로 4번째 추가)
+            const billInfo = document.querySelector('.bill-info');
+            
+            // 대표발의자 행이 없다면 추가
+            if (billInfo.children.length === 3) {
+                const proposerRow = document.createElement('div');
+                proposerRow.className = 'info-row';
+                proposerRow.innerHTML = `
+                    <span class="info-label">대표발의자:</span>
+                    <span class="info-value">${bill.proposer}</span>
+                `;
+                billInfo.appendChild(proposerRow);
+            } else {
+                // 이미 있다면 업데이트
+                document.querySelector('.info-row:nth-child(4) .info-value').textContent = bill.proposer;
+            }
+            
+            // 전역 상태 업데이트
+            currentBill = bill;
+        }
+
+        // URL에서 법률안 ID 가져오기 (실제로는 라우팅에서 전달받음)
+        function getBillIdFromUrl() {
+            // 실제 구현에서는 URL 파라미터나 라우팅에서 가져옴
+            // 예시: return new URLSearchParams(window.location.search).get('billId');
+            // 지금은 테스트용으로 임의의 ID 반환
+            return 'PRC_Z2Z1Z0Z3X2L4M0H9A2V6K5R0V7P2H1'; // 예시 ID
+        }
+
+        // 같은 위원회의 관련 법률안 가져오기
+        async function fetchRelatedBills(committee) {
+            try {
+                const params = {
+                    Key: API_CONFIG.key,
+                    Type: 'json',
+                    pIndex: 1,
+                    pSize: 5,
+                    AGE: API_CONFIG.age,
+                    COMMITTEE: committee
+                };
+                
+                const queryString = new URLSearchParams(params).toString();
+                const response = await fetch(`${API_CONFIG.baseUrl}?${queryString}`);
+                const data = await response.json();
+                
+                if (data.nzmimeepazxkubdpn && data.nzmimeepazxkubdpn[1] && data.nzmimeepazxkubdpn[1].row) {
+                    return data.nzmimeepazxkubdpn[1].row.filter(bill => bill.BILL_ID !== currentBill.id);
+                }
+                return [];
+            } catch (error) {
+                console.error('관련 법률안 가져오기 실패:', error);
+                return [];
+            }
+        }
+
+        // 관련 법률안 목록 업데이트
+        function updateRelatedBills(bills) {
+            const relatedList = document.querySelector('.summary-list');
+            relatedList.innerHTML = '';
+            
+            bills.forEach(bill => {
+                const li = document.createElement('li');
+                li.textContent = bill.BILL_NAME;
+                li.style.cursor = 'pointer';
+                li.addEventListener('click', function() {
+                    // 해당 법률안 상세 페이지로 이동
+                    loadBillDetail(bill.BILL_ID);
+                });
+                relatedList.appendChild(li);
+            });
+        }
+
+        // 법률안 상세 정보 로드
+        async function loadBillDetail(billId) {
+            try {
+                // 로딩 표시
+                document.querySelector('.bill-title').textContent = '로딩 중...';
+                
+                const bill = await fetchBillDetail(billId);
+                if (bill) {
+                    updateBillInfo(bill);
+                    
+                    // 관련 법률안 로드
+                    const relatedBills = await fetchRelatedBills(bill.committee);
+                    updateRelatedBills(relatedBills);
+                } else {
+                    console.error('법률안 정보를 가져올 수 없습니다.');
+                    document.querySelector('.bill-title').textContent = '법률안 정보를 불러올 수 없습니다.';
+                }
+            } catch (error) {
+                console.error('법률안 로드 실패:', error);
+                document.querySelector('.bill-title').textContent = '오류가 발생했습니다.';
+            }
+        }
+
+        // 전역 상태
+        let userVote = null; // 'agree', 'disagree', null
+        let commentCounter = 6; // 다음 익명 번호 (익명5까지 있으므로)
+        let voteCounts = {
+            agree: 4842,
+            disagree: 5033
+        };
+
+        // DOM 요소들
+        const voteButtons = document.querySelectorAll('.vote-btn');
+        const commentInput = document.getElementById('comment-input');
+        const commentSubmit = document.getElementById('comment-submit');
+        const commentsList = document.getElementById('comments-list');
+        const voteMessage = document.getElementById('vote-message');
+        const agreeCountEl = document.getElementById('agree-count');
+        const disagreeCountEl = document.getElementById('disagree-count');
+            // 답글 버튼 이벤트
+            document.querySelectorAll('.reply-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const commentId = this.getAttribute('data-comment-id');
+                    const replyForm = document.getElementById(`reply-form-${commentId}`);
+                    
+                    // 다른 답글 폼들 숨기기
+                    document.querySelectorAll('.reply-form').forEach(form => {
+                        form.classList.remove('show');
+                    });
+                    
+                    // 현재 답글 폼 토글
+                    replyForm.classList.toggle('show');
+                    
+                    if (replyForm.classList.contains('show')) {
+                        replyForm.querySelector('.reply-input').focus();
+                    }
+                });
+            });
+
+            // 답글 작성 버튼 이벤트
+            document.querySelectorAll('.reply-submit').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (!userVote) {
+                        alert('먼저 찬성 또는 반대를 선택해주세요.');
+                        return;
+                    }
+                    
+                    const parentId = this.getAttribute('data-parent-id');
+                    const replyForm = this.closest('.reply-form');
+                    const replyInput = replyForm.querySelector('.reply-input');
+                    const content = replyInput.value.trim();
+                    
+                    if (!content) {
+                        alert('답글 내용을 입력해주세요.');
+                        return;
+                    }
+                    
+                    addReply(parentId, content, userVote);
+                    replyInput.value = '';
+                    replyForm.classList.remove('show');
+                });
+            });
+
+            // 답글 취소 버튼 이벤트
+            document.querySelectorAll('.reply-cancel').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const replyForm = this.closest('.reply-form');
+                    replyForm.classList.remove('show');
+                    replyForm.querySelector('.reply-input').value = '';
+                });
+            });
+        }
+
+        // 답글 추가 함수
+        function addReply(parentId, content, stance) {
+            const stanceText = stance === 'agree' ? '찬성' : '반대';
+            const stanceClass = stance === 'agree' ? 'agree' : 'disagree';
+            
+            const replyItem = document.createElement('div');
+            replyItem.className = 'comment-item reply';
+            replyItem.setAttribute('data-comment-id', commentCounter);
+            replyItem.setAttribute('data-parent-id', parentId);
+            
+            replyItem.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-author">익명${commentCounter}</span>
+                    <span class="comment-stance ${stanceClass}">${stanceText}</span>
+                    <span class="comment-time">방금 전</span>
+                </div>
+                <div class="comment-content">${content}</div>
+                <div class="comment-actions">
+                    <button class="comment-action-btn reply-btn" data-comment-id="${commentCounter}">답글</button>
+                </div>
+                <div class="reply-form" id="reply-form-${commentCounter}">
+                    <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
+                    <button class="reply-submit" data-parent-id="${parentId}">답글 작성</button>
+                    <button class="reply-cancel">취소</button>
+                </div>
+            `;
+            
+            // 부모 댓글 찾기
+            const parentComment = document.querySelector(`[data-comment-id="${parentId}"]`);
+            let insertAfter = parentComment;
+            
+            // 해당 부모의 마지막 대댓글 찾기
+            let nextSibling = parentComment.nextElementSibling;
+            while (nextSibling && nextSibling.getAttribute('data-parent-id') === parentId) {
+                insertAfter = nextSibling;
+                nextSibling = nextSibling.nextElementSibling;
+            }
+            
+            // 답글 삽입
+            if (insertAfter.nextElementSibling) {
+                insertAfter.parentNode.insertBefore(replyItem, insertAfter.nextElementSibling);
+            } else {
+                insertAfter.parentNode.appendChild(replyItem);
+            }
+            
+            commentCounter++;
+            
+            // 새 답글에 이벤트 리스너 추가
+            initializeReplySystem();
+            
+            // 새 답글 강조 효과
+            replyItem.style.backgroundColor = '#e3f2fd';
+            setTimeout(() => {
+                replyItem.style.backgroundColor = '';
+                replyItem.style.transition = 'background-color 0.5s';
+            }, 2000);
+        }
+
+        // 투표 버튼 이벤트
+        voteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const vote = this.getAttribute('data-vote');
+                
+                // 이전 투표가 있다면 카운트 감소
+                if (userVote) {
+                    voteCounts[userVote]--;
+                    updateVoteCounts();
+                }
+                
+                // 같은 버튼을 다시 누르면 투표 취소
+                if (userVote === vote) {
+                    userVote = null;
+                    voteButtons.forEach(btn => btn.classList.remove('active'));
+                    disableComments();
+                } else {
+                    // 새로운 투표 설정
+                    userVote = vote;
+                    voteCounts[vote]++;
+                    updateVoteCounts();
+                    
+                    // 버튼 상태 업데이트
+                    voteButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    enableComments();
+                }
+            });
+        });
+
+        // 투표 수 업데이트
+        function updateVoteCounts() {
+            agreeCountEl.textContent = voteCounts.agree.toLocaleString();
+            disagreeCountEl.textContent = voteCounts.disagree.toLocaleString();
+        }
+
+        // 댓글 기능 활성화
+        function enableComments() {
+            commentInput.disabled = false;
+            commentSubmit.disabled = false;
+            voteMessage.style.display = 'none';
+            commentInput.placeholder = "법안에 대한 의견을 작성해주세요...";
+        }
+
+        // 댓글 기능 비활성화
+        function disableComments() {
+            commentInput.disabled = true;
+            commentSubmit.disabled = true;
+            voteMessage.style.display = 'block';
+            commentInput.placeholder = "댓글을 작성하려면 먼저 찬성 또는 반대를 선택해주세요.";
+            commentInput.value = '';
+        }
+
+        // 댓글 작성
+        commentSubmit.addEventListener('click', function() {
+            const content = commentInput.value.trim();
+            
+            if (!content) {
+                alert('댓글 내용을 입력해주세요.');
+                return;
+            }
+            
+            if (!userVote) {
+                alert('먼저 찬성 또는 반대를 선택해주세요.');
+                return;
+            }
+            
+            addComment(content, userVote);
+            commentInput.value = '';
+        });
+
+        // 엔터키로 댓글 작성
+        commentInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                commentSubmit.click();
+            }
+        });
+
+        // 댓글 추가 함수
+        function addComment(content, stance) {
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+            
+            const stanceText = stance === 'agree' ? '찬성' : '반대';
+            const stanceClass = stance === 'agree' ? 'agree' : 'disagree';
+            
+            commentItem.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-author">익명${commentCounter}</span>
+                    <span class="comment-stance ${stanceClass}">${stanceText}</span>
+                    <span class="comment-time">방금 전</span>
+                </div>
+                <div class="comment-content">${content}</div>
+            `;
+            
+            // 맨 위에 새 댓글 추가
+            commentsList.insertBefore(commentItem, commentsList.firstChild);
+            commentCounter++;
+            
+            // 새 댓글 강조 효과
+            commentItem.style.backgroundColor = '#e3f2fd';
+            setTimeout(() => {
+                commentItem.style.backgroundColor = '';
+                commentItem.style.transition = 'background-color 0.5s';
+            }, 2000);
+        }
+
+        // 관련 법률안 클릭 이벤트
+        document.querySelectorAll('.related-bill-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const billName = this.querySelector('.related-bill-name').textContent;
+                console.log(`관련 법률안 클릭: ${billName}`);
+                // 실제로는 해당 법률안 상세 페이지로 이동
+            });
+        });
+
+        // 의안 상세 버튼 이벤트
+        document.querySelector('.view-detail-btn').addEventListener('click', function() {
+            if (currentBill.detailLink) {
+                // API에서 가져온 DETAIL_LINK로 이동
+                window.open(currentBill.detailLink, '_blank');
+            } else {
+                alert('상세 페이지 링크를 찾을 수 없습니다.');
+            }
+        });
+
+        // 초기 상태 설정
+        document.addEventListener('DOMContentLoaded', function() {
+            disableComments();
+            initializeReplySystem();
+            
+            // 페이지 로드 시 법률안 정보 가져오기
+            const billId = getBillIdFromUrl();
+            if (billId) {
+                loadBillDetail(billId);
+            }
+        });
+    </script>
+</body>
+</html>
