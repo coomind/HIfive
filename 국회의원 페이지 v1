@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law.GG - 국회의원 목록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* 헤더 */
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #333;
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        /* 제목 */
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        /* 정당 카테고리 */
+        .party-section {
+            margin-bottom: 50px;
+        }
+
+        .party-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 40px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            flex-wrap: nowrap;
+        }
+
+        .party-tab {
+            background-color: #f8f9fa;
+            border: none;
+            padding: 15px 25px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #666;
+            border-right: 1px solid #e9ecef;
+            white-space: nowrap;
+            flex: 1;
+            text-align: center;
+        }
+
+        .party-tab:last-child {
+            border-right: none;
+        }
+
+        .party-tab:hover {
+            background-color: #e9ecef;
+            color: #333;
+        }
+
+        .party-tab.active {
+            background-color: #495057;
+            color: white;
+        }
+
+        /* 국회의원 테이블 */
+        .members-table {
+            background-color: white;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: none;
+            border: none;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .table-header {
+            background-color: #e9ecef;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            padding: 15px 25px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #495057;
+            border-bottom: 1px solid #dee2e6;
+            text-align: center;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            padding: 18px 25px;
+            border-bottom: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            color: #333;
+            align-items: center;
+            text-align: center;
+            background-color: white;
+            justify-items: center;
+        }
+
+        .table-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .table-row:last-child {
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .member-photo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #dee2e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-size: 12px;
+            margin: 0 auto;
+        }
+
+        .member-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+
+        .member-party {
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .member-age {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .member-gender {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .member-status {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        /* 페이지네이션 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 40px;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #dee2e6;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+
+        .page-btn:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .page-btn.active {
+            background-color: #495057;
+            color: white;
+            border-color: #495057;
+        }
+
+        .page-btn.dots {
+            border: none;
+            cursor: default;
+            background-color: transparent;
+        }
+
+        .page-btn.dots:hover {
+            background-color: transparent;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1024px) {
+            .party-tab {
+                padding: 15px 20px;
+                font-size: 14px;
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 70px 120px 150px 80px 60px;
+                padding: 15px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .party-tab {
+                padding: 12px 15px;
+                font-size: 13px;
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 60px 1fr 120px 60px;
+                gap: 10px;
+                padding: 12px 15px;
+            }
+            
+            .member-age {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .party-tab {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .nav-menu {
+                gap: 20px;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="your-logo.png" alt="LAW.GG" class="logo-img">
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">국회의원</a>
+                <a href="#" class="nav-item">법률안</a>
+                <a href="#" class="nav-item">입법제안</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="container">
+        <!-- 제목 -->
+        <h1 class="page-title">국회의원 목록</h1>
+
+        <!-- 정당 카테고리 -->
+        <section class="party-section">
+            <div class="party-tabs">
+                <a href="#" class="party-tab active" data-party="전체">전체</a>
+                <a href="#" class="party-tab" data-party="국민의 힘">국민의 힘</a>
+                <a href="#" class="party-tab" data-party="더불어 민주당">더불어 민주당</a>
+                <a href="#" class="party-tab" data-party="정의당">정의당</a>
+                <a href="#" class="party-tab" data-party="개혁신당">개혁신당</a>
+                <a href="#" class="party-tab" data-party="기타">기타</a>
+            </div>
+        </section>
+
+        <!-- 국회의원 테이블 -->
+        <section class="members-table">
+            <div class="table-header">
+                <div>사진</div>
+                <div>이름</div>
+                <div>정당</div>
+                <div>나이</div>
+                <div>성별</div>
+            </div>
+
+            <a href="#" class="table-row" data-member-id="loading">
+                <div class="member-photo">로딩중...</div>
+                <div class="member-name">데이터를 불러오는 중입니다</div>
+                <div class="member-party">-</div>
+                <div class="member-age">-</div>
+                <div class="member-gender">-</div>
+            </a>
+        </section>
+
+        <!-- 페이지네이션 -->
+        <div class="pagination">
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <a href="#" class="page-btn">4</a>
+            <a href="#" class="page-btn">5</a>
+            <a href="#" class="page-btn">6</a>
+            <a href="#" class="page-btn">7</a>
+            <a href="#" class="page-btn">8</a>
+            <a href="#" class="page-btn dots">...</a>
+        </div>
+    </main>
+
+    <script>
+        // API 설정
+        const API_CONFIG = {
+            baseUrl: 'https://open.assembly.go.kr/portal/openapi/nwvrqwxyaytdsfvhu',
+            key: '69e4e44944d642599c407265cef3443b', // 실제 API 키로 변경 필요
+        };
+
+        // 현재 상태
+        let currentParty = '전체';
+        let currentPage = 1;
+
+        // 국회의원 정보 API 호출
+        async function fetchMembers(params = {}) {
+            const defaultParams = {
+                Key: API_CONFIG.key,
+                Type: 'json',
+                pIndex: currentPage,
+                pSize: 10
+            };
+
+            const queryParams = { ...defaultParams, ...params };
+            const queryString = new URLSearchParams(queryParams).toString();
+            
+            try {
+                const response = await fetch(`${API_CONFIG.baseUrl}?${queryString}`);
+                const data = await response.json();
+                
+                if (data.nwvrqwxyaytdsfvhu && data.nwvrqwxyaytdsfvhu[1] && data.nwvrqwxyaytdsfvhu[1].row) {
+                    return {
+                        members: data.nwvrqwxyaytdsfvhu[1].row,
+                        totalCount: data.nwvrqwxyaytdsfvhu[0].head[0].list_total_count
+                    };
+                }
+                return { members: [], totalCount: 0 };
+            } catch (error) {
+                console.error('국회의원 정보 가져오기 실패:', error);
+                return { members: [], totalCount: 0 };
+            }
+        }
+
+        // 테이블 업데이트 함수
+        function updateMembersTable(members) {
+            const tableContainer = document.querySelector('.members-table');
+            
+            let tableHTML = `
+                <div class="table-header">
+                    <div>사진</div>
+                    <div>이름</div>
+                    <div>정당</div>
+                    <div>나이</div>
+                    <div>성별</div>
+                </div>
+            `;
+
+            if (members && members.length > 0) {
+                members.forEach(member => {
+                    const name = member.HG_NM || '-';
+                    const party = member.POLY_NM || '-';
+                    const age = calculateAge(member.BTH_DATE) || '-';
+                    const gender = member.SEX_GBN_NM || '-';
+                    const photoUrl = member.PHOTO_URL || '';
+                    
+                    tableHTML += `
+                        <a href="#" class="table-row" data-member-id="${member.MONA_CD}">
+                            <div class="member-photo">
+                                ${photoUrl ? `<img src="${photoUrl}" alt="${name}" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">` : '사진'}
+                            </div>
+                            <div class="member-name">${name}</div>
+                            <div class="member-party">${party}</div>
+                            <div class="member-age">${age}</div>
+                            <div class="member-gender">${gender}</div>
+                        </a>
+                    `;
+                });
+            } else {
+                tableHTML += `
+                    <div style="padding: 40px; text-align: center; color: #666; grid-column: 1 / -1;">
+                        검색 결과가 없습니다.
+                    </div>
+                `;
+            }
+
+            tableContainer.innerHTML = tableHTML;
+
+            // 새로 생성된 행들에 이벤트 리스너 추가
+            document.querySelectorAll('.table-row').forEach(row => {
+                row.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const memberId = this.getAttribute('data-member-id');
+                    const memberName = this.querySelector('.member-name').textContent;
+                    console.log(`국회의원 상세보기: ${memberId} - ${memberName}`);
+                    // 국회의원 상세 페이지로 이동
+                    // window.location.href = `/member-detail?memberId=${memberId}`;
+                });
+            });
+        }
+
+        // 나이 계산 함수
+        function calculateAge(birthDate) {
+            if (!birthDate) return '';
+            
+            const birth = new Date(birthDate);
+            const today = new Date();
+            let age = today.getFullYear() - birth.getFullYear();
+            const monthDiff = today.getMonth() - birth.getMonth();
+            
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+                age--;
+            }
+            
+            return `${age}세`;
+        }
+
+        // 페이지네이션 업데이트 함수
+        function updatePagination(totalCount) {
+            const totalPages = Math.ceil(totalCount / 10);
+            const pagination = document.querySelector('.pagination');
+            
+            let paginationHTML = '';
+            
+            const startPage = Math.max(1, currentPage - 4);
+            const endPage = Math.min(totalPages, startPage + 7);
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                paginationHTML += `<a href="#" class="page-btn ${activeClass}" data-page="${i}">${i}</a>`;
+            }
+            
+            if (endPage < totalPages) {
+                paginationHTML += `<a href="#" class="page-btn dots">...</a>`;
+            }
+            
+            pagination.innerHTML = paginationHTML;
+
+            // 페이지네이션 이벤트 리스너 추가
+            document.querySelectorAll('.page-btn:not(.dots)').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = parseInt(this.getAttribute('data-page'));
+                    if (page !== currentPage) {
+                        currentPage = page;
+                        loadCurrentData();
+                    }
+                });
+            });
+        }
+
+        // 현재 상태에 맞는 데이터 로드
+        async function loadCurrentData() {
+            showLoading();
+            
+            const params = {};
+            
+            if (currentParty && currentParty !== '전체') {
+                params.POLY_NM = currentParty;
+            }
+            
+            const result = await fetchMembers(params);
+            updateMembersTable(result.members);
+            updatePagination(result.totalCount);
+            
+            hideLoading();
+        }
+
+        // 로딩 표시
+        function showLoading() {
+            const tableContainer = document.querySelector('.members-table');
+            tableContainer.innerHTML = `
+                <div class="table-header">
+                    <div>사진</div>
+                    <div>이름</div>
+                    <div>정당</div>
+                    <div>나이</div>
+                    <div>성별</div>
+                </div>
+                <div style="padding: 60px; text-align: center; color: #666; grid-column: 1 / -1;">
+                    <div>데이터를 불러오는 중...</div>
+                </div>
+            `;
+        }
+
+        function hideLoading() {
+            // 로딩 상태 해제는 updateMembersTable에서 처리됨
+        }
+
+        // 정당 탭 클릭 이벤트
+        document.querySelectorAll('.party-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 모든 탭에서 active 클래스 제거
+                document.querySelectorAll('.party-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // 클릭된 탭에 active 클래스 추가
+                this.classList.add('active');
+                
+                // 선택된 정당 업데이트
+                currentParty = this.getAttribute('data-party');
+                currentPage = 1;
+                
+                // 해당 정당의 국회의원 목록 로드
+                loadCurrentData();
+                
+                console.log(`${currentParty} 정당 선택`);
+            });
+        });
+
+        // 정당별 국회의원 로드 함수 (기존 함수 대체)
+        function loadMembersByParty(party) {
+            currentParty = party;
+            currentPage = 1;
+            loadCurrentData();
+        }
+
+        // 페이지 데이터 로드 함수 (기존 함수 대체)  
+        function loadPage(pageNumber) {
+            currentPage = pageNumber;
+            loadCurrentData();
+        }
+
+        // 초기 로드
+        document.addEventListener('DOMContentLoaded', function() {
+            loadCurrentData();
+        });
+    </script>
+</body>
+</html>
