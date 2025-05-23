@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LawGG - 국회 정보 플랫폼</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #3498db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover {
+            color: #3498db;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 24px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+
+        .main-logo {
+            margin-bottom: 40px;
+        }
+
+        .main-logo-icon {
+            width: 120px;
+            height: 120px;
+            background: #2c3e50;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .main-logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .main-logo-subtitle {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-left: 16px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 60px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: #3498db;
+        }
+
+        .search-btn {
+            padding: 12px 24px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background: #34495e;
+        }
+
+        /* Content Sections */
+        .content-sections {
+            background: white;
+            padding: 40px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .section-list {
+            list-style: none;
+        }
+
+        .section-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+            color: #555;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .section-list li:hover {
+            color: #3498db;
+        }
+
+        .section-list li:last-child {
+            border-bottom: none;
+        }
+
+        .list-number {
+            background: #f8f9fa;
+            color: #666;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .member-avatar {
+            width: 24px;
+            height: 24px;
+            background: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content-sections {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 16px;
+            }
+
+            .main-content {
+                padding: 60px 16px;
+            }
+
+            .search-container {
+                flex-direction: column;
+                padding: 0 16px;
+            }
+
+            .header {
+                padding: 16px;
+            }
+
+            .nav {
+                gap: 16px;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <div class="logo-icon">⚖️</div>
+                <span>LAW.GG</span>
+            </div>
+            <nav class="nav">
+                <div class="nav-item">국회의원</div>
+                <div class="nav-item">법률안</div>
+                <div class="nav-item">입법제안</div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <section class="main-content">
+            <div class="main-logo">
+                <div class="main-logo-icon">
+                    <span class="main-logo-text">⚖️</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <span class="main-logo-subtitle">LAW.GG</span>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                <button class="search-btn" onclick="performSearch()">검색</button>
+            </div>
+        </section>
+
+        <!-- Content Sections -->
+        <div class="content-sections">
+            <!-- 화제의 법률안 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon">📋</div>
+                    화제의 법률안
+                </h2>
+                <ul class="section-list">
+                    <li>
+                        <div class="list-number">1</div>
+                        <span>국회법 일부개정 법률안</span>
+                    </li>
+                    <li>
+                        <div class="list-number">2</div>
+                        <span>의료법 일부개정 법률안</span>
+                    </li>
+                    <li>
+                        <div class="list-number">3</div>
+                        <span>아동복지법 일부개정 법률안</span>
+                    </li>
+                    <li>
+                        <div class="list-number">4</div>
+                        <span>국회법 일부개정 법률안</span>
+                    </li>
+                    <li>
+                        <div class="list-number">5</div>
+                        <span>국민연금법 일부개정 법률안</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 화제의 국회의원 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon">👤</div>
+                    화제의 국회의원
+                </h2>
+                <ul class="section-list">
+                    <li>
+                        <div class="list-number">1</div>
+                        <div class="member-avatar">이</div>
+                        <span>이재명</span>
+                    </li>
+                    <li>
+                        <div class="list-number">2</div>
+                        <div class="member-avatar">안</div>
+                        <span>안철수</span>
+                    </li>
+                    <li>
+                        <div class="list-number">3</div>
+                        <div class="member-avatar">김</div>
+                        <span>김진표</span>
+                    </li>
+                    <li>
+                        <div class="list-number">4</div>
+                        <div class="member-avatar">박</div>
+                        <span>박혜련</span>
+                    </li>
+                    <li>
+                        <div class="list-number">5</div>
+                        <div class="member-avatar">박</div>
+                        <span>박정미</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                alert(`"${query}"에 대한 검색을 실행합니다.`);
+            } else {
+                alert('검색어를 입력해주세요.');
+            }
+        }
+
+        // Enter key support for search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Add click handlers for list items
+        document.querySelectorAll('.section-list li').forEach(item => {
+            item.addEventListener('click', function() {
+                const text = this.querySelector('span').textContent;
+                alert(`${text} 상세 정보를 확인합니다.`);
+            });
+        });
+
+        // Add navigation handlers
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                alert(`${this.textContent} 페이지로 이동합니다.`);
+            });
+        });
+    </script>
+</body>
+</html>
