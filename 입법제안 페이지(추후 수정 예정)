@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law.GG - 입법제안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* 헤더 */
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo-img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #333;
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        /* 제목과 등록 버튼 */
+        .title-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .register-btn {
+            background-color: #495057;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .register-btn:hover {
+            background-color: #343a40;
+        }
+
+        /* 입법제안 테이블 */
+        .proposals-table {
+            background-color: white;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: none;
+            border: none;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .table-header {
+            background-color: #e9ecef;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1.5fr 1fr 1.5fr 1fr;
+            padding: 15px 25px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #495057;
+            border-bottom: 1px solid #dee2e6;
+            text-align: center;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1.5fr 1fr 1.5fr 1fr;
+            padding: 18px 25px;
+            border-bottom: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            color: #333;
+            align-items: center;
+            text-align: center;
+            background-color: white;
+            justify-items: center;
+        }
+
+        .table-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .table-row:last-child {
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .proposal-no {
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .proposal-title {
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .proposal-field {
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .proposal-author {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        .proposal-date {
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        .proposal-views {
+            font-size: 13px;
+            color: #6c757d;
+        }
+
+        /* 페이지네이션 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 40px;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #dee2e6;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+
+        .page-btn:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .page-btn.active {
+            background-color: #495057;
+            color: white;
+            border-color: #495057;
+        }
+
+        .page-btn.dots {
+            border: none;
+            cursor: default;
+            background-color: transparent;
+        }
+
+        .page-btn.dots:hover {
+            background-color: transparent;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1024px) {
+            .table-header, .table-row {
+                grid-template-columns: 1fr 2fr 1.5fr 1fr 1.5fr 1fr;
+                padding: 15px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .table-header, .table-row {
+                grid-template-columns: 1fr 2fr 1fr 1fr;
+                gap: 10px;
+                padding: 12px 15px;
+            }
+            
+            .proposal-field, .proposal-views {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .nav-menu {
+                gap: 20px;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="your-logo.png" alt="LAW.GG" class="logo-img">
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">국회의원</a>
+                <a href="#" class="nav-item">법률안</a>
+                <a href="#" class="nav-item">입법제안</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="container">
+        <!-- 제목과 등록 버튼 -->
+        <div class="title-section">
+            <h1 class="page-title">입법제안</h1>
+            <button class="register-btn" id="register-btn">등록</button>
+        </div>
+
+        <!-- 입법제안 테이블 -->
+        <section class="proposals-table">
+            <div class="table-header">
+                <div>NO</div>
+                <div>제목</div>
+                <div>분류분야</div>
+                <div>제안자</div>
+                <div>작성일자</div>
+                <div>조회수</div>
+            </div>
+
+            <a href="#" class="table-row" data-proposal-id="3097">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+
+            <a href="#" class="table-row" data-proposal-id="3096">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+
+            <a href="#" class="table-row" data-proposal-id="3095">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+
+            <a href="#" class="table-row" data-proposal-id="3094">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+
+            <a href="#" class="table-row" data-proposal-id="3093">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+
+            <a href="#" class="table-row" data-proposal-id="3092">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+
+            <a href="#" class="table-row" data-proposal-id="3091">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+
+            <a href="#" class="table-row" data-proposal-id="3090">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+
+            <a href="#" class="table-row" data-proposal-id="3089">
+                <div class="proposal-no">3097</div>
+                <div class="proposal-title">국민자산증진제 정책제안</div>
+                <div class="proposal-field">국민안전분야</div>
+                <div class="proposal-author">김OO</div>
+                <div class="proposal-date">2025.04.14</div>
+                <div class="proposal-views">3097</div>
+            </a>
+        </section>
+
+        <!-- 페이지네이션 -->
+        <div class="pagination">
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <a href="#" class="page-btn">4</a>
+            <a href="#" class="page-btn">5</a>
+            <a href="#" class="page-btn">6</a>
+            <a href="#" class="page-btn">7</a>
+            <a href="#" class="page-btn">8</a>
+            <a href="#" class="page-btn dots">...</a>
+        </div>
+    </main>
+
+    <script>
+        // 현재 상태
+        let currentPage = 1;
+
+        // 등록 버튼 클릭 이벤트
+        document.getElementById('register-btn').addEventListener('click', function() {
+            console.log('입법제안 작성 페이지로 이동');
+            // 추후 입법제안 작성 페이지로 이동
+            // window.location.href = '/proposal-create';
+            alert('입법제안 작성 페이지는 추후 구현 예정입니다.');
+        });
+
+        // 입법제안 행 클릭 이벤트
+        document.querySelectorAll('.table-row').forEach(row => {
+            row.addEventListener('click', function(e) {
+                e.preventDefault();
+                const proposalId = this.getAttribute('data-proposal-id');
+                const proposalTitle = this.querySelector('.proposal-title').textContent;
+                
+                console.log(`입법제안 상세보기: ${proposalId} - ${proposalTitle}`);
+                // 추후 입법제안 상세 페이지로 이동
+                // window.location.href = `/proposal-detail?proposalId=${proposalId}`;
+                alert(`입법제안 상세 페이지는 추후 구현 예정입니다.\n제안 ID: ${proposalId}`);
+            });
+        });
+
+        // 페이지네이션 클릭 이벤트
+        document.querySelectorAll('.page-btn:not(.dots)').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 모든 페이지 버튼에서 active 클래스 제거
+                document.querySelectorAll('.page-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // 클릭된 페이지에 active 클래스 추가
+                this.classList.add('active');
+                
+                currentPage = parseInt(this.textContent);
+                
+                // 해당 페이지 데이터 로드
+                loadPage(currentPage);
+                
+                console.log(`${currentPage}페이지로 이동`);
+            });
+        });
+
+        // 페이지 데이터 로드 함수
+        function loadPage(pageNumber) {
+            console.log(`${pageNumber}페이지 데이터를 로드합니다.`);
+            // 실제로는 API를 호출하여 해당 페이지의 입법제안 데이터를 가져와서 테이블 업데이트
+            // 예: fetchProposalsPage(pageNumber).then(updateProposalsTable);
+        }
+
+        // 테이블 업데이트 함수 (API 연동 시 사용)
+        function updateProposalsTable(proposals) {
+            // 입법제안 데이터로 테이블 업데이트
+            console.log('테이블 업데이트:', proposals);
+        }
+
+        // 초기 로드
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('입법제안 페이지 로드 완료');
+        });
+    </script>
+</body>
+</html>
