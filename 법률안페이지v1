@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law.GG - 법률안명</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        /* 헤더 */
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #333;
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        /* 제목과 검색 */
+        .title-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-input {
+            width: 300px;
+            height: 45px;
+            padding: 0 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 25px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background-color: white;
+        }
+
+        .search-input:focus {
+            border-color: #495057;
+            box-shadow: 0 0 0 3px rgba(73, 80, 87, 0.1);
+        }
+
+        .search-input::placeholder {
+            color: #adb5bd;
+        }
+
+        .search-btn {
+            background-color: #495057;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            height: 45px;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            background-color: #343a40;
+        }
+
+        /* 위원회 카테고리 */
+        .committee-section {
+            margin-bottom: 50px;
+        }
+
+        .committee-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .committee-grid:last-child {
+            margin-bottom: 0;
+        }
+
+        .committee-item {
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 20px 12px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #495057;
+            line-height: 1.3;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .committee-item:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+            transform: translateY(-1px);
+        }
+
+        .committee-item.active {
+            background-color: #495057;
+            color: white;
+            border-color: #495057;
+        }
+
+        /* 법률안 테이블 */
+        .bills-section {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid #dee2e6;
+        }
+
+        .table-header {
+            background-color: #f8f9fa;
+            display: grid;
+            grid-template-columns: 140px 300px 140px 140px 160px;
+            padding: 18px 30px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #495057;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 140px 300px 140px 140px 160px;
+            padding: 18px 30px;
+            border-top: 1px solid #e9ecef;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            color: #333;
+            align-items: center;
+        }
+
+        .table-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .bill-number {
+            font-weight: 600;
+            color: #495057;
+            font-size: 14px;
+        }
+
+        .bill-title {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .bill-date {
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .bill-court {
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        .bill-status {
+            font-size: 13px;
+            color: #6c757d;
+            font-weight: 500;
+        }
+
+        /* 페이지네이션 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 40px;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #dee2e6;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            color: #495057;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+
+        .page-btn:hover {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .page-btn.active {
+            background-color: #495057;
+            color: white;
+            border-color: #495057;
+        }
+
+        .page-btn.dots {
+            border: none;
+            cursor: default;
+            background-color: transparent;
+        }
+
+        .page-btn.dots:hover {
+            background-color: transparent;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 1024px) {
+            .committee-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 120px 240px 120px 120px 140px;
+                padding: 15px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .committee-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .table-header, .table-row {
+                grid-template-columns: 80px 1fr 90px;
+                gap: 10px;
+                padding: 12px 15px;
+            }
+            
+            .bill-court, .bill-status {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .committee-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .nav-menu {
+                gap: 20px;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 헤더 -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">⚖</div>
+                <span>LAW.GG</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">국회의원</a>
+                <a href="#" class="nav-item">법률안</a>
+                <a href="#" class="nav-item">입법제안</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 메인 컨테이너 -->
+    <main class="container">
+        <!-- 제목과 검색 -->
+        <div class="title-section">
+            <h1 class="page-title">법률안명</h1>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="법률안을 검색하세요">
+                <button class="search-btn">검색</button>
+            </div>
+        </div>
+
+        <!-- 위원회 카테고리 -->
+        <section class="committee-section">
+            <div class="committee-grid">
+                <a href="#" class="committee-item">국회운영위원회</a>
+                <a href="#" class="committee-item">기획재정위원회</a>
+                <a href="#" class="committee-item">외교통일위원회</a>
+                <a href="#" class="committee-item">문화체육관광위원회</a>
+                <a href="#" class="committee-item">보건복지위원회</a>
+                <a href="#" class="committee-item">정보위원회</a>
+                <a href="#" class="committee-item">법제사법위원회</a>
+                <a href="#" class="committee-item">교육위원회</a>
+                <a href="#" class="committee-item">국방위원회</a>
+                <a href="#" class="committee-item">통일외교수석부<br>행정각부위원회</a>
+                <a href="#" class="committee-item">환경노동위원회</a>
+                <a href="#" class="committee-item">여성가족위원회</a>
+                <a href="#" class="committee-item">정무위원회</a>
+                <a href="#" class="committee-item">과학기술정보<br>방송통신위원회</a>
+                <a href="#" class="committee-item">행정안전위원회</a>
+                <a href="#" class="committee-item">국토교통위원회</a>
+                <a href="#" class="committee-item">예산결산특별위원회</a>
+                <a href="#" class="committee-item">산업통상자원<br>중소벤처기업위원회</a>
+            </div>
+        </section>
+
+        <!-- 법률안 테이블 -->
+        <section class="bills-section">
+            <div class="table-header">
+                <div>의안번호</div>
+                <div>의안명</div>
+                <div>제안일자</div>
+                <div>제안자</div>
+                <div>상임위원회</div>
+            </div>
+
+            <a href="#" class="table-row">
+                <div class="bill-number">로딩중...</div>
+                <div class="bill-title">데이터를 불러오는 중입니다</div>
+                <div class="bill-date">-</div>
+                <div class="bill-court">-</div>
+                <div class="bill-status">-</div>
+            </a>
+        </section>
+
+        <!-- 페이지네이션 -->
+        <div class="pagination">
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">3</a>
+            <a href="#" class="page-btn">4</a>
+            <a href="#" class="page-btn">5</a>
+            <a href="#" class="page-btn">6</a>
+            <a href="#" class="page-btn">7</a>
+            <a href="#" class="page-btn">8</a>
+            <a href="#" class="page-btn dots">...</a>
+        </div>
+    </main>
+
+    <script>
+        // API 설정
+        const API_CONFIG = {
+            baseUrl: 'https://open.assembly.go.kr/portal/openapi/nzmimeepazxkubdpn',
+            key: '69e4e44944d642599c407265cef3443b',
+            age: '22' // 22대 국회
+        };
+
+        // 현재 상태
+        let currentPage = 1;
+        let currentCommittee = '';
+        let currentSearchTerm = '';
+
+        // API 호출 함수
+        async function fetchBills(params = {}) {
+            const defaultParams = {
+                Key: API_CONFIG.key,
+                Type: 'json',
+                pIndex: currentPage,
+                pSize: 10,
+                AGE: API_CONFIG.age
+            };
+
+            const queryParams = { ...defaultParams, ...params };
+            const queryString = new URLSearchParams(queryParams).toString();
+            
+            try {
+                const response = await fetch(`${API_CONFIG.baseUrl}?${queryString}`);
+                const data = await response.json();
+                
+                if (data.nzmimeepazxkubdpn && data.nzmimeepazxkubdpn[1] && data.nzmimeepazxkubdpn[1].row) {
+                    return {
+                        bills: data.nzmimeepazxkubdpn[1].row,
+                        totalCount: data.nzmimeepazxkubdpn[0].head[0].list_total_count
+                    };
+                }
+                return { bills: [], totalCount: 0 };
+            } catch (error) {
+                console.error('API 호출 오류:', error);
+                return { bills: [], totalCount: 0 };
+            }
+        }
+
+        // 테이블 업데이트 함수
+        function updateTable(bills) {
+            const tableContainer = document.querySelector('.bills-section');
+            
+            let tableHTML = `
+                <div class="table-header">
+                    <div>의안번호</div>
+                    <div>의안명</div>
+                    <div>제안일자</div>
+                    <div>제안자</div>
+                    <div>상임위원회</div>
+                </div>
+            `;
+
+            if (bills && bills.length > 0) {
+                bills.forEach(bill => {
+                    const billNo = bill.BILL_NO || '-';
+                    const billName = bill.BILL_NAME || '-';
+                    const proposeDate = bill.PROPOSE_DT ? bill.PROPOSE_DT.substring(0, 10) : '-';
+                    const proposer = bill.RST_PROPOSER || bill.PROPOSER || '-';
+                    const committee = bill.COMMITTEE || '-';
+                    
+                    tableHTML += `
+                        <a href="#" class="table-row" data-bill-id="${bill.BILL_ID}">
+                            <div class="bill-number">${billNo}</div>
+                            <div class="bill-title">${billName}</div>
+                            <div class="bill-date">${proposeDate}</div>
+                            <div class="bill-court">${proposer}</div>
+                            <div class="bill-status">${committee}</div>
+                        </a>
+                    `;
+                });
+            } else {
+                tableHTML += `
+                    <div style="padding: 40px; text-align: center; color: #666;">
+                        검색 결과가 없습니다.
+                    </div>
+                `;
+            }
+
+            tableContainer.innerHTML = tableHTML;
+
+            // 새로 생성된 행들에 이벤트 리스너 추가
+            document.querySelectorAll('.table-row').forEach(row => {
+                row.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const billId = this.getAttribute('data-bill-id');
+                    const billTitle = this.querySelector('.bill-title').textContent;
+                    console.log(`법률안 상세보기: ${billId} - ${billTitle}`);
+                    // 상세 페이지로 이동 로직
+                });
+            });
+        }
+
+        // 페이지네이션 업데이트 함수
+        function updatePagination(totalCount) {
+            const totalPages = Math.ceil(totalCount / 10);
+            const pagination = document.querySelector('.pagination');
+            
+            let paginationHTML = '';
+            
+            // 이전 페이지들
+            const startPage = Math.max(1, currentPage - 4);
+            const endPage = Math.min(totalPages, startPage + 7);
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                paginationHTML += `<a href="#" class="page-btn ${activeClass}" data-page="${i}">${i}</a>`;
+            }
+            
+            if (endPage < totalPages) {
+                paginationHTML += `<a href="#" class="page-btn dots">...</a>`;
+            }
+            
+            pagination.innerHTML = paginationHTML;
+
+            // 페이지네이션 이벤트 리스너 추가
+            document.querySelectorAll('.page-btn:not(.dots)').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const page = parseInt(this.getAttribute('data-page'));
+                    if (page !== currentPage) {
+                        currentPage = page;
+                        loadCurrentData();
+                    }
+                });
+            });
+        }
+
+        // 현재 상태에 맞는 데이터 로드
+        async function loadCurrentData() {
+            showLoading();
+            
+            const params = {};
+            
+            if (currentCommittee) {
+                params.COMMITTEE = currentCommittee;
+            }
+            
+            if (currentSearchTerm) {
+                params.BILL_NAME = currentSearchTerm;
+            }
+            
+            const result = await fetchBills(params);
+            updateTable(result.bills);
+            updatePagination(result.totalCount);
+            
+            hideLoading();
+        }
+
+        // 로딩 표시
+        function showLoading() {
+            const tableContainer = document.querySelector('.bills-section');
+            tableContainer.innerHTML = `
+                <div style="padding: 60px; text-align: center; color: #666;">
+                    <div>데이터를 불러오는 중...</div>
+                </div>
+            `;
+        }
+
+        function hideLoading() {
+            // 로딩 상태 해제는 updateTable에서 처리됨
+        }
+
+        // 위원회 카테고리 클릭 이벤트
+        document.querySelectorAll('.committee-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 모든 active 클래스 제거
+                document.querySelectorAll('.committee-item').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // 클릭된 항목에 active 클래스 추가
+                this.classList.add('active');
+                
+                // 해당 위원회의 법률안 로드
+                currentCommittee = this.textContent.trim();
+                currentPage = 1;
+                currentSearchTerm = '';
+                document.querySelector('.search-input').value = '';
+                
+                loadCurrentData();
+            });
+        });
+
+        // 검색 기능
+        const searchInput = document.querySelector('.search-input');
+        const searchBtn = document.querySelector('.search-btn');
+
+        // 검색 버튼 클릭 이벤트
+        searchBtn.addEventListener('click', function() {
+            const searchTerm = searchInput.value.trim();
+            performSearch(searchTerm);
+        });
+
+        // 엔터키로 검색
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value.trim();
+                performSearch(searchTerm);
+            }
+        });
+
+        // 검색 실행 함수
+        function performSearch(searchTerm) {
+            currentSearchTerm = searchTerm;
+            currentPage = 1;
+            currentCommittee = '';
+            
+            // 위원회 선택 해제
+            document.querySelectorAll('.committee-item').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            loadCurrentData();
+        }
+
+        // 초기 로드
+        document.addEventListener('DOMContentLoaded', function() {
+            // 첫 번째 위원회 활성화하고 데이터 로드
+            const firstCommittee = document.querySelector('.committee-item');
+            if (firstCommittee) {
+                firstCommittee.classList.add('active');
+                currentCommittee = firstCommittee.textContent.trim();
+                loadCurrentData();
+            }
+        });
+    </script>
+</body>
+</html>
