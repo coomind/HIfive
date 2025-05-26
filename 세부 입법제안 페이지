@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law.GG - 입법제안 상세보기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .proposal-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .folder-icon {
+            font-size: 20px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .proposal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .content-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            background-color: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .section-content {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .proposal-list {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .proposal-list ol {
+            padding-left: 20px;
+        }
+
+        .proposal-list li {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .proposal-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .vote-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            padding: 20px 0;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .vote-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 30px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .vote-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .vote-btn.agree {
+            border-color: #007bff;
+        }
+
+        .vote-btn.agree:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .vote-btn.disagree {
+            border-color: #dc3545;
+        }
+
+        .vote-btn.disagree:hover {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .vote-label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .vote-count {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .vote-total {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .comments-section {
+            margin-top: 40px;
+        }
+
+        .comment-form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .comment-submit {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            float: right;
+        }
+
+        .comment-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .comment-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .comment-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .comment-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .comment-author {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .comment-date {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .comment-content {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+            margin-left: 42px;
+        }
+
+        .comment-actions {
+            margin-left: 42px;
+            margin-top: 10px;
+        }
+
+        .comment-action {
+            font-size: 12px;
+            color: #666;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .comment-action:hover {
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .proposal-content {
+                padding: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .vote-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .vote-btn {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .page-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="your-logo.png" alt="LAW.GG" />
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">국회의원</a>
+                <a href="#" class="nav-item">법률안</a>
+                <a href="#" class="nav-item">입법제안</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="proposal-header">
+            <span class="folder-icon">📁</span>
+            <h1 class="page-title">입법제안</h1>
+        </div>
+
+        <div class="proposal-content">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">제목</div>
+                    <div class="info-value">국민자산증진제 정책 제안</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">게시일자</div>
+                    <div class="info-value">2025.04.26</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">대상법안</div>
+                    <div class="info-value">국민안전증진법</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">초안번호</div>
+                    <div class="info-value">국민안전증진법 제2조</div>
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">현황</div>
+                <div class="section-content">
+                    현재 국민안전증진법은 광범위한 해석, 적용방안, 관련 제약 등을 통해 개인의 안전과 보안의 차원을 취함.
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">문제점</div>
+                <div class="section-content">
+                    시행령 변소쪽에서 규모 한정적 해석, 유건 건선점에서 획고원 안전성 새화소를 재공되는 방식이 민원에서 절차가.
+                </div>
+            </div>
+
+            <div class="content-section">
+                <div class="section-title">제안사유</div>
+                <div class="proposal-list">
+                    <ol>
+                        <li>
+                            모바일 및 것 디지털로 연계 실용을 제공
+                            <br>- 국민 수소권 확충기간 수 있는 통소, 제경제 중산해 등 대한민국 서울의 재용 설치 검밥 특허 제공 업체데이터.
+                        </li>
+                        <li>
+                            강화 참여 행령의 새로 산하한 재임
+                            <br>- 역, 국민 수소 예약정 민간, 강화의 현 수 인 자문소를 받아 모든 기책액저 해서 등.
+                        </li>
+                        <li>
+                            등록 참여 공약을 전입소 환경
+                            <br>- 노동, 한정된, 의원 하관의 이차적 재경을 취득 모순적인 여전히 순위 석복 취수.
+                        </li>
+                    </ol>
+                </div>
+                <div style="text-align: right; margin-top: 10px; font-size: 12px; color: #666;">
+                    조회수 : 3900
+                </div>
+            </div>
+
+            <div class="vote-section">
+                <a href="#" class="vote-btn agree" id="agreeBtn">
+                    <div class="vote-label">찬성</div>
+                    <div class="vote-count">4842</div>
+                </a>
+                <a href="#" class="vote-btn disagree" id="disagreeBtn">
+                    <div class="vote-label">반대</div>
+                    <div class="vote-count">5033</div>
+                </a>
+            </div>
+            <div class="vote-total">총원수 : 9900</div>
+
+            <div class="comments-section">
+                <div class="comment-form">
+                    <textarea class="comment-input" placeholder="댓글을 입력하세요..."></textarea>
+                    <button class="comment-submit" id="submitComment">댓글 작성</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <div class="comment-avatar">👤</div>
+                        <span class="comment-author">익명1 - 찬성</span>
+                        <span class="comment-date">1분전</span>
+                    </div>
+                    <div class="comment-content">
+                        이번법 경제정책이 잘 좋을 것 같습니다.
+                    </div>
+                    <div class="comment-actions">
+                        <a href="#" class="comment-action">좋아요 · 1</a>
+                        <a href="#" class="comment-action">답글</a>
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <div class="comment-avatar">👤</div>
+                        <span class="comment-author">익명2 - 반대</span>
+                        <span class="comment-date">3분전</span>
+                    </div>
+                    <div class="comment-content">
+                        서울 촉업데이터로.
+                    </div>
+                    <div class="comment-actions">
+                        <a href="#" class="comment-action">좋아요 · 0</a>
+                        <a href="#" class="comment-action">답글</a>
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <div class="comment-avatar">👤</div>
+                        <span class="comment-author">익명3 - 찬성</span>
+                        <span class="comment-date">5분전</span>
+                    </div>
+                    <div class="comment-content">
+                        이 법안은 국민의 안전을 지키기 위해 중요합니다 어떤가요?
+                    </div>
+                    <div class="comment-actions">
+                        <a href="#" class="comment-action">좋아요 · 2</a>
+                        <a href="#" class="comment-action">답글</a>
+                    </div>
+                </div>
+
+                <button style="width: 100%; padding: 10px; background-color: #007bff; color: white; border: none; border-radius: 4px; margin-top: 20px; cursor: pointer;">더보기</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let hasVoted = false;
+        let agreeCount = 4842;
+        let disagreeCount = 5033;
+        let userVoteType = '';
+        let commentCounter = 4; // 기존 댓글이 3개이므로 다음은 4번부터
+
+        document.getElementById('agreeBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (hasVoted) {
+                alert('이미 투표하였습니다.');
+                return;
+            }
+            
+            agreeCount++;
+            hasVoted = true;
+            userVoteType = 'agree';
+            updateVoteCounts();
+            alert('찬성 투표가 완료되었습니다.');
+        });
+
+        document.getElementById('disagreeBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (hasVoted) {
+                alert('이미 투표하였습니다.');
+                return;
+            }
+            
+            disagreeCount++;
+            hasVoted = true;
+            userVoteType = 'disagree';
+            updateVoteCounts();
+            alert('반대 투표가 완료되었습니다.');
+        });
+
+        function updateVoteCounts() {
+            document.querySelector('#agreeBtn .vote-count').textContent = agreeCount;
+            document.querySelector('#disagreeBtn .vote-count').textContent = disagreeCount;
+            document.querySelector('.vote-total').textContent = `총원수 : ${agreeCount + disagreeCount}`;
+        }
+
+        document.getElementById('submitComment').addEventListener('click', function() {
+            const commentInput = document.querySelector('.comment-input');
+            const commentText = commentInput.value.trim();
+            
+            if (!commentText) {
+                alert('댓글을 입력해주세요.');
+                return;
+            }
+
+            if (!hasVoted) {
+                alert('투표를 먼저 해주세요.');
+                return;
+            }
+
+            const voteText = userVoteType === 'agree' ? '찬성' : '반대';
+            const voteClass = userVoteType === 'agree' ? 'agree' : 'disagree';
+
+            const newComment = document.createElement('div');
+            newComment.className = 'comment-item';
+            newComment.innerHTML = `
+                <div class="comment-header">
+                    <div class="comment-avatar">👤</div>
+                    <span class="comment-author">익명${commentCounter} - ${voteText}</span>
+                    <span class="comment-date">방금전</span>
+                </div>
+                <div class="comment-content">${commentText}</div>
+                <div class="comment-actions">
+                    <a href="#" class="comment-action">좋아요 · 0</a>
+                    <a href="#" class="comment-action">답글</a>
+                </div>
+            `;
+
+            const commentsSection = document.querySelector('.comments-section');
+            const firstComment = commentsSection.querySelector('.comment-item');
+            commentsSection.insertBefore(newComment, firstComment);
+
+            commentCounter++; // 댓글 번호 증가
+            commentInput.value = '';
+            alert('댓글이 작성되었습니다.');
+        });
+
+        document.querySelector('.comment-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && e.ctrlKey) {
+                document.getElementById('submitComment').click();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('입법제안 상세보기 페이지 로드 완료');
+        });
+    </script>
+</body>
+</html>
