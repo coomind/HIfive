@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law.GG - 입법제안 글쓰기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .edit-icon {
+            font-size: 20px;
+        }
+
+        .form-container {
+            background-color: #e9ecef;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: white;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #666;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: white;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #666;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background-color: #333;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-switch.off {
+            background-color: #ccc;
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.off .toggle-knob {
+            transform: translateX(26px);
+        }
+
+        .content-notice {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .content-notice p {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .content-notice p:last-child {
+            margin-bottom: 0;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background-color: #545b62;
+        }
+
+        .btn-submit {
+            background-color: #333;
+            color: white;
+        }
+
+        .btn-submit:hover {
+            background-color: #000;
+        }
+
+        .checkbox-group {
+            margin-top: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-item input[type="radio"] {
+            margin-top: 3px;
+        }
+
+        .checkbox-item label {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            .page-title {
+                font-size: 20px;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="your-logo.png" alt="LAW.GG" />
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">국회의원</a>
+                <a href="#" class="nav-item">법률안</a>
+                <a href="#" class="nav-item">입법제안</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">
+            <span class="edit-icon">✏️</span>
+            입법제안 글쓰기
+        </h1>
+
+        <div class="form-container">
+            <form id="proposal-form">
+                <div class="form-group">
+                    <div class="toggle-container">
+                        <label class="form-label">제목</label>
+                        <div class="toggle-switch" id="publicToggle">
+                            <div class="toggle-knob"></div>
+                        </div>
+                        <span style="font-size: 12px; color: #666;">공개 여부</span>
+                    </div>
+                    <input type="text" class="form-input" id="title" placeholder="제목을 입력하세요">
+                </div>
+
+                <div class="form-group">
+                    <label for="category" class="form-label">대상법안</label>
+                    <input type="text" class="form-input" id="category" placeholder="대상법안을 입력하세요">
+                </div>
+
+                <div class="form-group">
+                    <label for="keywords" class="form-label">초안번호</label>
+                    <input type="text" class="form-input" id="keywords" placeholder="예시) 제1조, 제2조부터 제10조 등">
+                </div>
+
+                <div class="form-group">
+                    <label for="content" class="form-label">현황</label>
+                    <textarea class="form-textarea" id="content" placeholder="- 현황 법령 ∙ 제도의 구체적 내용"></textarea>
+                    
+                    <div class="content-notice">
+                        <p>※ 개시판의 성격에 맞지 않는 게시글, 욕설, 비방, 광고, 반복게시물을 올릴 경우 임의 삭제될 수 있습니다.</p>
+                        <p>※ 다른 초안(법안)에 대한 본인 명의 게시, 오타 등을, 인쇄소를 반복의 오류 시정 등의 법안정보에 대하여 신속 업소보고 차원 초안작성을 받아 비마므다.</p>
+                        <p>(최대2000자)</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="problems" class="form-label">문제점</label>
+                    <textarea class="form-textarea" id="problems" placeholder="- 법령 운영의 문제점 또는 한계"></textarea>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">- 문제점 운계 법정되는 부정되어나 비효율적, 그 사례 등<br>(최대2000자)</p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">제안사유</label>
+                    <textarea class="form-textarea" id="reason" placeholder="- 구체적 개선 방안"></textarea>
+                    <p style="font-size: 12px; color: #666; margin-top: 5px;">- 개선방안(초안측의서/국체/신진 등)의 차별 법령 개선안</p>
+                    
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="radio" id="improve1" name="improvement" value="improve">
+                            <label for="improve1">○ 차별 법정<br>제00조로 -</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="radio" id="improve2" name="improvement" value="enact">
+                            <label for="improve2">○ 법령 제서의<br>제00조로 -<br>(최대2000자)</label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="button-container">
+                <button type="button" class="btn btn-cancel">임시저장</button>
+                <button type="submit" class="btn btn-submit" form="proposal-form">등록</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 토글 스위치 기능
+        const toggle = document.getElementById('publicToggle');
+        let isPublic = true;
+
+        toggle.addEventListener('click', function() {
+            isPublic = !isPublic;
+            if (isPublic) {
+                toggle.classList.remove('off');
+            } else {
+                toggle.classList.add('off');
+            }
+            console.log('공개 여부:', isPublic ? '공개' : '비공개');
+        });
+
+        // 폼 제출 처리
+        document.getElementById('proposal-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                keywords: document.getElementById('keywords').value,
+                content: document.getElementById('content').value,
+                problems: document.getElementById('problems').value,
+                reason: document.getElementById('reason').value,
+                isPublic: isPublic,
+                improvement: document.querySelector('input[name="improvement"]:checked')?.value
+            };
+
+            // 입력 검증
+            if (!formData.title.trim()) {
+                alert('제목을 입력해주세요.');
+                return;
+            }
+
+            if (!formData.category.trim()) {
+                alert('대상법안을 입력해주세요.');
+                return;
+            }
+
+            if (!formData.content.trim()) {
+                alert('현황을 입력해주세요.');
+                return;
+            }
+
+            console.log('입법제안 데이터:', formData);
+            alert('입법제안이 등록되었습니다.');
+            
+            // 실제로는 서버로 데이터 전송
+            // submitProposal(formData);
+        });
+
+        // 임시저장 기능
+        document.querySelector('.btn-cancel').addEventListener('click', function() {
+            const formData = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                keywords: document.getElementById('keywords').value,
+                content: document.getElementById('content').value,
+                problems: document.getElementById('problems').value,
+                reason: document.getElementById('reason').value,
+                isPublic: isPublic
+            };
+
+            // 로컬스토리지에 임시저장 (실제로는 서버에 저장)
+            console.log('임시저장 데이터:', formData);
+            alert('임시저장되었습니다.');
+        });
+
+        // 글자 수 체크 기능
+        function checkTextLength(textareaId, maxLength) {
+            const textarea = document.getElementById(textareaId);
+            if (textarea.value.length > maxLength) {
+                textarea.value = textarea.value.substring(0, maxLength);
+                alert(`최대 ${maxLength}자까지 입력 가능합니다.`);
+            }
+        }
+
+        // 텍스트영역에 글자 수 제한 추가
+        document.getElementById('content').addEventListener('input', function() {
+            checkTextLength('content', 2000);
+        });
+
+        document.getElementById('problems').addEventListener('input', function() {
+            checkTextLength('problems', 2000);
+        });
+
+        document.getElementById('reason').addEventListener('input', function() {
+            checkTextLength('reason', 2000);
+        });
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('입법제안 글쓰기 페이지 로드 완료');
+        });
+    </script>
+</body>
+</html>
