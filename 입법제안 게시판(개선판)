@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Law.GG - 입법 제안</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .header {
+            background-color: white;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 12px;
+            transition: color 0.2s;
+        }
+
+        .nav-item:hover {
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .proposals-table {
+            background-color: white;
+            border: 1px solid #ddd;
+            width: 100%;
+        }
+
+        .table-header {
+            background-color: #f8f9fa;
+            display: grid;
+            grid-template-columns: 80px 200px 150px 100px 120px 80px 80px;
+            padding: 12px 15px;
+            font-weight: 600;
+            font-size: 13px;
+            color: #333;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+            align-items: center;
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 80px 200px 150px 100px 120px 80px 80px;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            align-items: center;
+            text-align: center;
+            background-color: white;
+            transition: background-color 0.2s;
+        }
+
+        .table-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .proposal-no {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .proposal-title {
+            font-size: 13px;
+            color: #333;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .proposal-bill {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .proposal-author {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .proposal-date {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .proposal-views {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .proposal-status {
+            font-size: 13px;
+            color: #333;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            margin-top: 30px;
+        }
+
+        .page-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s;
+        }
+
+        .page-btn:hover {
+            background-color: #f8f9fa;
+        }
+
+        .page-btn.active {
+            background-color: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .table-header, .table-row {
+                grid-template-columns: 60px 1fr 100px 80px 100px 80px;
+                font-size: 12px;
+            }
+            
+            .proposal-views {
+                display: none;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .container {
+                padding: 30px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0 15px;
+            }
+            
+            .nav-menu {
+                gap: 15px;
+            }
+            
+            .nav-item {
+                font-size: 12px;
+            }
+
+            .table-header, .table-row {
+                grid-template-columns: 50px 1fr 80px 80px;
+                font-size: 11px;
+                padding: 10px 12px;
+            }
+
+            .proposal-bill, .proposal-author {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="your-logo.png" alt="LAW.GG" />
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">국회의원</a>
+                <a href="#" class="nav-item">법률안</a>
+                <a href="#" class="nav-item">입법제안</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">입법 제안</h1>
+
+        <section class="proposals-table">
+            <div class="table-header">
+                <div>NO</div>
+                <div>제목</div>
+                <div>법률안명</div>
+                <div>제안자</div>
+                <div>제안일자</div>
+                <div>조회수</div>
+                <div>공개여부</div>
+            </div>
+
+            <div id="table-content">
+                <!-- 동적으로 생성될 테이블 행들 -->
+            </div>
+        </section>
+
+        <div class="pagination" id="pagination">
+            <!-- 동적으로 생성될 페이지 번호들 -->
+        </div>
+    </main>
+
+    <script>
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let totalPages = 8;
+
+        const sampleProposals = [
+            { id: 3097, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "공개" },
+            { id: 3096, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "비공개" },
+            { id: 3095, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "공개" },
+            { id: 3094, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "공개" },
+            { id: 3093, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "공개" },
+            { id: 3092, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "비공개" },
+            { id: 3091, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "비공개" },
+            { id: 3090, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "비공개" },
+            { id: 3089, title: "국민자산증진제 정책제안", bill: "국민안전증진법", author: "허OO", date: "2025.04.14.", views: "3097", status: "공개" }
+        ];
+
+        function loadPage(pageNumber) {
+            const startIndex = (pageNumber - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const pageData = generatePageData(pageNumber);
+            
+            updateProposalsTable(pageData);
+            updatePagination(pageNumber);
+        }
+
+        function generatePageData(pageNumber) {
+            return sampleProposals.map((proposal, index) => ({
+                ...proposal,
+                id: proposal.id - (pageNumber - 1) * itemsPerPage + index
+            }));
+        }
+
+        function updateProposalsTable(proposals) {
+            const tableContent = document.getElementById('table-content');
+            tableContent.innerHTML = '';
+
+            proposals.forEach(proposal => {
+                const row = document.createElement('a');
+                row.href = '#';
+                row.className = 'table-row';
+                row.setAttribute('data-proposal-id', proposal.id);
+                
+                row.innerHTML = `
+                    <div class="proposal-no">${proposal.id}</div>
+                    <div class="proposal-title">${proposal.title}</div>
+                    <div class="proposal-bill">${proposal.bill}</div>
+                    <div class="proposal-author">${proposal.author}</div>
+                    <div class="proposal-date">${proposal.date}</div>
+                    <div class="proposal-views">${proposal.views}</div>
+                    <div class="proposal-status">${proposal.status}</div>
+                `;
+
+                row.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const proposalId = this.getAttribute('data-proposal-id');
+                    const proposalTitle = this.querySelector('.proposal-title').textContent;
+                    
+                    console.log(`입법제안 상세보기: ${proposalId} - ${proposalTitle}`);
+                    alert(`입법제안 상세보기\n제안 ID: ${proposalId}\n제목: ${proposalTitle}`);
+                });
+
+                tableContent.appendChild(row);
+            });
+        }
+
+        function updatePagination(currentPage) {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('a');
+                pageBtn.href = '#';
+                pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+                pageBtn.textContent = i;
+                
+                pageBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (i !== currentPage) {
+                        goToPage(i);
+                    }
+                });
+
+                pagination.appendChild(pageBtn);
+            }
+        }
+
+        function goToPage(pageNumber) {
+            currentPage = pageNumber;
+            loadPage(pageNumber);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('입법제안 페이지 로드 완료');
+            loadPage(1);
+        });
+    </script>
+</body>
+</html>
