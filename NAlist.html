@@ -322,16 +322,15 @@
 <body>
     <!-- 헤더 -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <img src="your-logo.png" alt="LAW.GG" class="logo-img">
-            </div>
-            <nav class="nav-menu">
-                <a href="#" class="nav-item">국회의원</a>
-                <a href="#" class="nav-item">법률안</a>
-                <a href="#" class="nav-item">입법제안</a>
-            </nav>
+        <div class="logo" onclick="goToHome()">
+            <div class="logo-icon">⚖️</div>
+            <span>LAW.GG</span>
         </div>
+            <nav class="nav">
+            <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+            <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+            <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
+         </nav>
     </header>
 
     <!-- 메인 컨테이너 -->
@@ -385,6 +384,31 @@
     </main>
 
     <script>
+        // 페이지 이동
+        function goToHome() {
+            // 페이지를 새로고침하여 홈으로 돌아가기
+            window.location.reload();
+        }
+
+        function goToMembersPage() {
+            window.location.href = 'NAlist.html';
+        }
+
+        function geToBillsPage() {
+            window.location.href = 'LAWlist.html';
+        }
+
+        function goToProposalsPage() {
+           window.location.href = 'PROPlist.html';
+        }
+
+        function viewBillDetail(billId, billTitle) {
+            window.location.href = `LAWdetail.html/${billId}`;
+        }
+
+        function viewMemberDetail(memberId, memberName) {
+            window.location.href = `NAdetail.html/${memberId}`;
+        }
         // API 설정
         const API_CONFIG = {
             baseUrl: 'https://open.assembly.go.kr/portal/openapi/nwvrqwxyaytdsfvhu',
