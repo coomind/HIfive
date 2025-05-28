@@ -43,6 +43,12 @@
             font-size: 20px;
             font-weight: 700;
             color: #2c3e50;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
         }
 
         .logo-icon {
@@ -198,11 +204,17 @@
             align-items: center;
             gap: 12px;
             cursor: pointer;
-            transition: color 0.2s ease;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+            margin: 0 -8px;
+            padding-left: 8px;
+            padding-right: 8px;
         }
 
         .section-list li:hover {
             color: #3498db;
+            background-color: #f8f9fa;
+            transform: translateX(4px);
         }
 
         .section-list li:last-child {
@@ -210,8 +222,8 @@
         }
 
         .list-number {
-            background: #f8f9fa;
-            color: #666;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
             width: 24px;
             height: 24px;
             border-radius: 50%;
@@ -220,6 +232,29 @@
             justify-content: center;
             font-size: 12px;
             font-weight: 600;
+            box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+        }
+
+        .view-count {
+            margin-left: auto;
+            font-size: 12px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .bill-info, .member-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .bill-title, .member-name {
+            font-weight: 500;
+        }
+
+        .bill-status, .member-party {
+            font-size: 12px;
+            color: #666;
         }
 
         .member-avatar {
@@ -279,14 +314,14 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <div class="logo">
+            <div class="logo" onclick="goToHome()">
                 <div class="logo-icon">⚖️</div>
                 <span>LAW.GG</span>
             </div>
             <nav class="nav">
-                <div class="nav-item">국회의원</div>
-                <div class="nav-item">법률안</div>
-                <div class="nav-item">입법제안</div>
+                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
             </nav>
         </header>
 
@@ -316,25 +351,40 @@
                     화제의 법률안
                 </h2>
                 <ul class="section-list">
-                    <li>
+                    <li onclick="viewBillDetail('bill_001', '국회법 일부개정 법률안')">
                         <div class="list-number">1</div>
-                        <span>국회법 일부개정 법률안</span>
+                        <div class="bill-info">
+                            <span class="bill-title">국회법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">12,458회</span>
                     </li>
-                    <li>
+                    <li onclick="viewBillDetail('bill_002', '의료법 일부개정 법률안')">
                         <div class="list-number">2</div>
-                        <span>의료법 일부개정 법률안</span>
+                        <div class="bill-info">
+                            <span class="bill-title">의료법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">9,247회</span>
                     </li>
-                    <li>
+                    <li onclick="viewBillDetail('bill_003', '아동복지법 일부개정 법률안')">
                         <div class="list-number">3</div>
-                        <span>아동복지법 일부개정 법률안</span>
+                        <div class="bill-info">
+                            <span class="bill-title">아동복지법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">8,932회</span>
                     </li>
-                    <li>
+                    <li onclick="viewBillDetail('bill_004', '교육기본법 일부개정 법률안')">
                         <div class="list-number">4</div>
-                        <span>국회법 일부개정 법률안</span>
+                        <div class="bill-info">
+                            <span class="bill-title">교육기본법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">7,821회</span>
                     </li>
-                    <li>
+                    <li onclick="viewBillDetail('bill_005', '국민연금법 일부개정 법률안')">
                         <div class="list-number">5</div>
-                        <span>국민연금법 일부개정 법률안</span>
+                        <div class="bill-info">
+                            <span class="bill-title">국민연금법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">6,543회</span>
                     </li>
                 </ul>
             </div>
@@ -346,30 +396,45 @@
                     화제의 국회의원
                 </h2>
                 <ul class="section-list">
-                    <li>
+                    <li onclick="viewMemberDetail('member_001', '이재명')">
                         <div class="list-number">1</div>
                         <div class="member-avatar">이</div>
-                        <span>이재명</span>
+                        <div class="member-info">
+                            <span class="member-name">이재명</span>
+                        </div>
+                        <span class="view-count">18,234회</span>
                     </li>
-                    <li>
+                    <li onclick="viewMemberDetail('member_002', '안철수')">
                         <div class="list-number">2</div>
                         <div class="member-avatar">안</div>
-                        <span>안철수</span>
+                        <div class="member-info">
+                            <span class="member-name">안철수</span>
+                        </div>
+                        <span class="view-count">15,672회</span>
                     </li>
-                    <li>
+                    <li onclick="viewMemberDetail('member_003', '김진표')">
                         <div class="list-number">3</div>
                         <div class="member-avatar">김</div>
-                        <span>김진표</span>
+                        <div class="member-info">
+                            <span class="member-name">김진표</span>
+                        </div>
+                        <span class="view-count">13,921회</span>
                     </li>
-                    <li>
+                    <li onclick="viewMemberDetail('member_004', '박혜련')">
                         <div class="list-number">4</div>
                         <div class="member-avatar">박</div>
-                        <span>박혜련</span>
+                        <div class="member-info">
+                            <span class="member-name">박혜련</span>
+                        </div>
+                        <span class="view-count">11,458회</span>
                     </li>
-                    <li>
+                    <li onclick="viewMemberDetail('member_005', '박정미')">
                         <div class="list-number">5</div>
                         <div class="member-avatar">박</div>
-                        <span>박정미</span>
+                        <div class="member-info">
+                            <span class="member-name">박정미</span>
+                        </div>
+                        <span class="view-count">9,876회</span>
                     </li>
                 </ul>
             </div>
@@ -377,6 +442,46 @@
     </div>
 
     <script>
+        function goToHome() {
+            // 페이지를 새로고침하여 홈으로 돌아가기
+            window.location.reload();
+        }
+
+        function goToMembersPage() {
+            // 국회의원 페이지로 이동
+            alert('국회의원 페이지로 이동합니다.');
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = '/members';
+        }
+
+        function geToBillsPage() {
+            // 법률안 페이지로 이동
+            alert('법률안 페이지로 이동합니다.');
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = '/bills';
+        }
+
+        function goToProposalsPage() {
+            // 입법제안 페이지로 이동
+            alert('입법제안 페이지로 이동합니다.');
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = '/proposals';
+        }
+
+        function viewBillDetail(billId, billTitle) {
+            // 법률안 상세 페이지로 이동
+            alert(`${billTitle} 상세 페이지로 이동합니다.\n법률안 ID: ${billId}`);
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = `/bills/${billId}`;
+        }
+
+        function viewMemberDetail(memberId, memberName) {
+            // 국회의원 상세 페이지로 이동
+            alert(`${memberName} 의원 상세 페이지로 이동합니다.\n의원 ID: ${memberId}`);
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = `/members/${memberId}`;
+        }
+
         function performSearch() {
             const query = document.getElementById('searchInput').value.trim();
             if (query) {
@@ -393,23 +498,10 @@
             }
         });
 
-        // Add click handlers for list items
-        document.querySelectorAll('.section-list li').forEach(item => {
-            item.addEventListener('click', function() {
-                const text = this.querySelector('span').textContent;
-                alert(`${text} 상세 정보를 확인합니다.`);
-            });
-        });
+        // Add click handlers for list items (이제 불필요하므로 제거)
+        // 각 항목에 개별 onclick 핸들러가 있음
 
-        // Add navigation handlers
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                if (this.textContent === '국회의원') {
-                    window.location.href = '/HIfive/국회의원리스트.html';
-                else
-                    alert(`${this.textContent} 페이지로 이동합니다.`);
-            });
-        });
+        // Navigation handlers are now handled by individual onclick functions
     </script>
 </body>
 </html>
