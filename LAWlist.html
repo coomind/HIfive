@@ -21,31 +21,26 @@
 
         /* 헤더 */
         .header {
-            background-color: white;
-            padding: 15px 0;
+            background: white;
             border-bottom: 1px solid #e9ecef;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-size: 20px;
-            font-weight: bold;
-            color: #333;
+            font-weight: 700;
+            color: #2c3e50;
             cursor: pointer;
             transition: opacity 0.2s ease;
         }
@@ -66,22 +61,22 @@
             font-weight: bold;
         }
 
-        .nav-menu {
+        .nav {
             display: flex;
-            gap: 30px;
+            gap: 24px;
         }
 
         .nav-item {
             color: #666;
             text-decoration: none;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
-            transition: color 0.2s;
             cursor: pointer;
+            transition: color 0.2s ease;
         }
 
         .nav-item:hover {
-            color: #333;
+            color: #3498db;
         }
 
         /* 메인 컨테이너 */
@@ -445,17 +440,15 @@
 <body>
     <!-- 헤더 -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo" onclick="goToHome()">
-                <div class="logo-icon">⚖️</div>
-                <span>LAW.GG</span>
-            </div>
-            <nav class="nav-menu">
-                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
-                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
-                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
-            </nav>
+        <div class="logo" onclick="goToHome()">
+            <div class="logo-icon">⚖️</div>
+            <span>LAW.GG</span>
         </div>
+        <nav class="nav">
+            <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+            <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+            <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
+        </nav>
     </header>
 
     <!-- 메인 컨테이너 -->
