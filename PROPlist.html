@@ -232,17 +232,16 @@
 </head>
 <body>
     <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <img src="your-logo.png" alt="LAW.GG" />
+            <div class="logo" onclick="goToHome()">
+                <div class="logo-icon">⚖️</div>
+                <span>LAW.GG</span>
             </div>
-            <nav class="nav-menu">
-                <a href="#" class="nav-item">국회의원</a>
-                <a href="#" class="nav-item">법률안</a>
-                <a href="#" class="nav-item">입법제안</a>
+            <nav class="nav">
+                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
             </nav>
-        </div>
-    </header>
+        </header>
 
     <main class="container">
         <h1 class="page-title">입법 제안</h1>
@@ -269,6 +268,31 @@
     </main>
 
     <script>
+        function goToHome() {
+            // 페이지를 새로고침하여 홈으로 돌아가기
+            window.location.reload();
+        }
+
+        function goToMembersPage() {
+            window.location.href = 'NAlist.html';
+        }
+
+        function geToBillsPage() {
+            window.location.href = 'LAWlist.html';
+        }
+
+        function goToProposalsPage() {
+           window.location.href = 'PROPlist.html';
+        }
+
+        function viewBillDetail(billId, billTitle) {
+            window.location.href = `LAWdetail.html/${billId}`;
+        }
+
+        function viewMemberDetail(memberId, memberName) {
+            window.location.href = `NAdetail.html/${memberId}`;
+        }
+
         let currentPage = 1;
         const itemsPerPage = 10;
         let totalPages = 8;
