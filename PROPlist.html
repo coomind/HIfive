@@ -285,29 +285,29 @@
     <script>
         // 페이지 이동 함수들
         function goToHome() {
-            alert('메인 페이지로 이동합니다.');
+            // 페이지를 새로고침하여 홈으로 돌아가기
+            window.location.href = 'index.html';
         }
 
         function goToMembersPage() {
-            alert('국회의원 페이지로 이동합니다.');
+            window.location.href = 'NAlist.html';
         }
 
         function geToBillsPage() {
-            alert('법률안 페이지로 이동합니다.');
+            window.location.href = 'LAWlist.html';
         }
 
         function goToProposalsPage() {
-            alert('입법제안 페이지로 이동합니다.');
+           window.location.href = 'PROPlist.html';
         }
 
         function viewBillDetail(billId, billTitle) {
-            alert(`${billTitle} 상세 페이지로 이동합니다.\n법률안 ID: ${billId}`);
+            window.location.href = `LAWdetail.html?billId=${billId}`;
         }
 
         function viewMemberDetail(memberId, memberName) {
-            alert(`${memberName} 의원 상세 페이지로 이동합니다.\n의원 ID: ${memberId}`);
+            window.location.href = `NAdetail.html?memberId=${memberId}`;
         }
-
         let currentPage = 1;
         const itemsPerPage = 10;
         let totalPages = 8;
