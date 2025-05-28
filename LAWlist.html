@@ -438,18 +438,16 @@
 <body>
     <!-- 헤더 -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <div class="logo-icon">⚖</div>
+            <div class="logo" onclick="goToHome()">
+                <div class="logo-icon">⚖️</div>
                 <span>LAW.GG</span>
             </div>
-            <nav class="nav-menu">
-                <a href="#" class="nav-item">국회의원</a>
-                <a href="#" class="nav-item">법률안</a>
-                <a href="#" class="nav-item">입법제안</a>
+            <nav class="nav">
+                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
             </nav>
-        </div>
-    </header>
+        </header>
 
     <!-- 메인 컨테이너 -->
     <main class="container">
@@ -515,6 +513,32 @@
     </main>
 
     <script>
+        //페이지 이동
+         function goToHome() {
+            // 페이지를 새로고침하여 홈으로 돌아가기
+            window.location.reload();
+        }
+
+        function goToMembersPage() {
+            window.location.href = 'NAlist.html';
+        }
+
+        function geToBillsPage() {
+            window.location.href = 'LAWlist.html';
+        }
+
+        function goToProposalsPage() {
+           window.location.href = 'PROPlist.html';
+        }
+
+        function viewBillDetail(billId, billTitle) {
+            window.location.href = `LAWdetail.html/${billId}`;
+        }
+
+        function viewMemberDetail(memberId, memberName) {
+            window.location.href = `NAdetail.html/${memberId}`;
+        }
+
         // 모의 API 데이터 (실제 API 연결 전까지 사용)
         const MOCK_DATA = {
             bills: [
