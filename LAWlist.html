@@ -19,7 +19,7 @@
             line-height: 1.4;
         }
 
-        /* 헤더 */
+        /* 헤더 - 메인 페이지와 동일하게 수정 */
         .header {
             background: white;
             border-bottom: 1px solid #e9ecef;
@@ -516,9 +516,8 @@
     </main>
 
     <script>
-        // 페이지 이동 함수들
+        // 페이지 이동 함수들 - 메인 페이지와 동일하게 수정
         function goToHome() {
-            // 페이지를 새로고침하여 홈으로 돌아가기
             window.location.href = 'index.html';
         }
 
@@ -535,11 +534,11 @@
         }
 
         function viewBillDetail(billId, billTitle) {
-            window.location.href = `LAWdetail.html?billId=${billId}`;
+            window.location.href = `LAWdetail.html/${billId}`;
         }
 
         function viewMemberDetail(memberId, memberName) {
-            window.location.href = `NAdetail.html?memberId=${memberId}`;
+            window.location.href = `NAdetail.html/${memberId}`;
         }
 
         // 모의 데이터
