@@ -29,6 +29,9 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -282,28 +285,27 @@
     <script>
         // 페이지 이동 함수들
         function goToHome() {
-            // 페이지를 새로고침하여 홈으로 돌아가기
-            window.location.href = 'index.html';
+            alert('메인 페이지로 이동합니다.');
         }
 
         function goToMembersPage() {
-            window.location.href = 'NAlist.html';
+            alert('국회의원 페이지로 이동합니다.');
         }
 
         function geToBillsPage() {
-            window.location.href = 'LAWlist.html';
+            alert('법률안 페이지로 이동합니다.');
         }
 
         function goToProposalsPage() {
-           window.location.href = 'PROPlist.html';
+            alert('입법제안 페이지로 이동합니다.');
         }
 
         function viewBillDetail(billId, billTitle) {
-            window.location.href = `LAWdetail.html?billId=${billId}`;
+            alert(`${billTitle} 상세 페이지로 이동합니다.\n법률안 ID: ${billId}`);
         }
 
         function viewMemberDetail(memberId, memberName) {
-            window.location.href = `NAdetail.html?memberId=${memberId}`;
+            alert(`${memberName} 의원 상세 페이지로 이동합니다.\n의원 ID: ${memberId}`);
         }
 
         let currentPage = 1;
