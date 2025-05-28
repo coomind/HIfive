@@ -24,14 +24,17 @@
             background: white;
             border-bottom: 1px solid #e9ecef;
             padding: 16px 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+
+        .header-content {
             max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
@@ -413,11 +416,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            .header-content {
-                padding: 0 15px;
-            }
-            
-            .nav-menu {
+            .nav {
                 gap: 20px;
             }
             
@@ -439,9 +438,8 @@
 </head>
 <body>
     <!-- 헤더 -->
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
+    <header class="header">
+        <div class="header-content">
             <div class="logo" onclick="goToHome()">
                 <div class="logo-icon">⚖️</div>
                 <span>LAW.GG</span>
@@ -451,7 +449,8 @@
                 <div class="nav-item" onclick="geToBillsPage()">법률안</div>
                 <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
             </nav>
-        </header>
+        </div>
+    </header>
 
     <!-- 메인 컨테이너 -->
     <main class="container">
@@ -517,29 +516,29 @@
     </main>
 
     <script>
+        // 페이지 이동 함수들
         function goToHome() {
-            // 페이지를 새로고침하여 홈으로 돌아가기
-            window.location.href = 'index.html';
+            alert('메인 페이지로 이동합니다.');
         }
 
         function goToMembersPage() {
-            window.location.href = 'NAlist.html';
+            alert('국회의원 페이지로 이동합니다.');
         }
 
         function geToBillsPage() {
-            window.location.href = 'LAWlist.html';
+            alert('법률안 페이지로 이동합니다.');
         }
 
         function goToProposalsPage() {
-           window.location.href = 'PROPlist.html';
+            alert('입법제안 페이지로 이동합니다.');
         }
 
         function viewBillDetail(billId, billTitle) {
-            window.location.href = `LAWdetail.html?billId=${billId}`;
+            alert(`${billTitle} 상세 페이지로 이동합니다.\n법률안 ID: ${billId}`);
         }
 
         function viewMemberDetail(memberId, memberName) {
-            window.location.href = `NAdetail.html?memberId=${memberId}`;
+            alert(`${memberName} 의원 상세 페이지로 이동합니다.\n의원 ID: ${memberId}`);
         }
 
         // 모의 데이터
