@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Law.GG - 입법 제안</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,56 +13,71 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: #f5f5f5;
             color: #333;
             line-height: 1.4;
         }
 
+        /* 헤더 */
         .header {
-            background-color: white;
-            padding: 15px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .header-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .logo {
             display: flex;
             align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
         }
 
-        .logo img {
-            height: 40px;
-            width: auto;
+        .logo:hover {
+            opacity: 0.8;
         }
 
-        .nav-menu {
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #3498db;
+            border-radius: 4px;
             display: flex;
-            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
         }
 
         .nav-item {
             color: #666;
             text-decoration: none;
             font-size: 14px;
-            padding: 8px 12px;
-            transition: color 0.2s;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s ease;
         }
 
         .nav-item:hover {
-            color: #333;
+            color: #3498db;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
         }
@@ -206,16 +222,12 @@
         }
 
         @media (max-width: 480px) {
-            .header-content {
-                padding: 0 15px;
-            }
-            
-            .nav-menu {
-                gap: 15px;
+            .nav {
+                gap: 20px;
             }
             
             .nav-item {
-                font-size: 12px;
+                font-size: 14px;
             }
 
             .table-header, .table-row {
@@ -232,16 +244,16 @@
 </head>
 <body>
     <header class="header">
-            <div class="logo" onclick="goToHome()">
-                <div class="logo-icon">⚖️</div>
-                <span>LAW.GG</span>
-            </div>
-            <nav class="nav">
-                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
-                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
-                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
-            </nav>
-        </header>
+        <div class="logo" onclick="goToHome()">
+            <div class="logo-icon">⚖️</div>
+            <span>LAW.GG</span>
+        </div>
+        <nav class="nav">
+            <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+            <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+            <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
+        </nav>
+    </header>
 
     <main class="container">
         <h1 class="page-title">입법 제안</h1>
@@ -268,29 +280,29 @@
     </main>
 
     <script>
+        // 페이지 이동 함수들
         function goToHome() {
-            // 페이지를 새로고침하여 홈으로 돌아가기
-            window.location.href = 'index.html';
+            alert('메인 페이지로 이동합니다.');
         }
 
         function goToMembersPage() {
-            window.location.href = 'NAlist.html';
+            alert('국회의원 페이지로 이동합니다.');
         }
 
         function geToBillsPage() {
-            window.location.href = 'LAWlist.html';
+            alert('법률안 페이지로 이동합니다.');
         }
 
         function goToProposalsPage() {
-           window.location.href = 'PROPlist.html';
+            alert('입법제안 페이지로 이동합니다.');
         }
 
         function viewBillDetail(billId, billTitle) {
-            window.location.href = `LAWdetail.html/${billId}`;
+            alert(`${billTitle} 상세 페이지로 이동합니다.\n법률안 ID: ${billId}`);
         }
 
         function viewMemberDetail(memberId, memberName) {
-            window.location.href = `NAdetail.html/${memberId}`;
+            alert(`${memberName} 의원 상세 페이지로 이동합니다.\n의원 ID: ${memberId}`);
         }
 
         let currentPage = 1;
@@ -350,7 +362,6 @@
                     const proposalId = this.getAttribute('data-proposal-id');
                     const proposalTitle = this.querySelector('.proposal-title').textContent;
                     
-                    console.log(`입법제안 상세보기: ${proposalId} - ${proposalTitle}`);
                     alert(`입법제안 상세보기\n제안 ID: ${proposalId}\n제목: ${proposalTitle}`);
                 });
 
