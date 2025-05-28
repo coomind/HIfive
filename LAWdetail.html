@@ -849,31 +849,28 @@
 
     <script>
         function goToHome() {
-            // 메인 페이지로 이동
-            alert('메인 페이지로 이동합니다.');
-            // 실제 구현 시에는 다음과 같이 페이지 이동
-            // window.location.href = '/';
+            // 페이지를 새로고침하여 홈으로 돌아가기
+            window.location.href = 'index.html';
         }
 
         function goToMembersPage() {
-            // 국회의원 페이지로 이동
-            alert('국회의원 페이지로 이동합니다.');
-            // 실제 구현 시에는 다음과 같이 페이지 이동
-            // window.location.href = '/members';
+            window.location.href = 'NAlist.html';
         }
 
         function geToBillsPage() {
-            // 법률안 페이지로 이동
-            alert('법률안 페이지로 이동합니다.');
-            // 실제 구현 시에는 다음과 같이 페이지 이동
-            // window.location.href = '/bills';
+            window.location.href = 'LAWlist.html';
         }
 
         function goToProposalsPage() {
-            // 입법제안 페이지로 이동
-            alert('입법제안 페이지로 이동합니다.');
-            // 실제 구현 시에는 다음과 같이 페이지 이동
-            // window.location.href = '/proposals';
+           window.location.href = 'PROPlist.html';
+        }
+
+        function viewBillDetail(billId, billTitle) {
+            window.location.href = `LAWdetail.html/${billId}`;
+        }
+
+        function viewMemberDetail(memberId, memberName) {
+            window.location.href = `NAdetail.html/${memberId}`;
         }
 
         // API 설정
