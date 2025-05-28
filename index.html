@@ -452,31 +452,19 @@
         }
 
         function geToBillsPage() {
-            // 법률안 페이지로 이동
-            alert('법률안 페이지로 이동합니다.');
-            // 실제 구현 시에는 다음과 같이 페이지 이동
-            // window.location.href = '/bills';
+            window.location.href = 'LAWlist.html';
         }
 
         function goToProposalsPage() {
-            // 입법제안 페이지로 이동
-            alert('입법제안 페이지로 이동합니다.');
-            // 실제 구현 시에는 다음과 같이 페이지 이동
-            // window.location.href = '/proposals';
+           window.location.href = 'PROPlist.html';
         }
 
         function viewBillDetail(billId, billTitle) {
-            // 법률안 상세 페이지로 이동
-            alert(`${billTitle} 상세 페이지로 이동합니다.\n법률안 ID: ${billId}`);
-            // 실제 구현 시에는 다음과 같이 페이지 이동
-            // window.location.href = `/bills/${billId}`;
+            window.location.href = `LAWdetail.html/${billId}`;
         }
 
         function viewMemberDetail(memberId, memberName) {
-            // 국회의원 상세 페이지로 이동
-            alert(`${memberName} 의원 상세 페이지로 이동합니다.\n의원 ID: ${memberId}`);
-            // 실제 구현 시에는 다음과 같이 페이지 이동
-            // window.location.href = `/members/${memberId}`;
+            window.location.href = `NAdetail.html/${memberId}`;
         }
 
         function performSearch() {
@@ -495,10 +483,6 @@
             }
         });
 
-        // Add click handlers for list items (이제 불필요하므로 제거)
-        // 각 항목에 개별 onclick 핸들러가 있음
-
-        // Navigation handlers are now handled by individual onclick functions
     </script>
 </body>
 </html>
