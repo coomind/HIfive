@@ -496,13 +496,12 @@
         }
 
         function viewBillDetail(billId, billTitle) {
-            window.location.href = `LAWdetail.html/${billId}`;
+            window.location.href = `LAWdetail.html?billId=${billId}`;
         }
 
         function viewMemberDetail(memberId, memberName) {
-            window.location.href = `NAdetail.html/${memberId}`;
+            window.location.href = `NAdetail.html?memberId=${memberId}`;
         }
-
         // API 설정
         const API_CONFIG = {
             memberUrl: 'https://open.assembly.go.kr/portal/openapi/nwvrqwxyaytdsfvhu',
