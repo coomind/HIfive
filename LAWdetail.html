@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Law.GG - 의료법 일부개정법률안</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +13,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: #f8f9fa;
             color: #333;
             line-height: 1.4;
@@ -41,11 +42,24 @@
             font-size: 20px;
             font-weight: bold;
             color: #333;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
         }
 
-        .logo-img {
-            height: 40px;
-            width: auto;
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #3498db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
         }
 
         .nav-menu {
@@ -59,6 +73,7 @@
             font-size: 15px;
             font-weight: 500;
             transition: color 0.2s;
+            cursor: pointer;
         }
 
         .nav-item:hover {
@@ -85,6 +100,17 @@
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             margin-bottom: 40px;
+        }
+
+        .vote-section-centered {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px 0;
+            padding: 30px 0;
+            border-top: 1px solid #e9ecef;
+            border-bottom: 1px solid #e9ecef;
         }
 
         .full-width-section {
@@ -620,67 +646,93 @@
 <body>
     <!-- 헤더 -->
     <header class="header">
+        <div class="header-content">
             <div class="logo" onclick="goToHome()">
                 <div class="logo-icon">⚖️</div>
                 <span>LAW.GG</span>
             </div>
-            <nav class="nav">
+            <nav class="nav-menu">
                 <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
                 <div class="nav-item" onclick="geToBillsPage()">법률안</div>
                 <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
             </nav>
-        </header>
+        </div>
+    </header>
 
     <!-- 메인 컨테이너 -->
     <main class="container">
         <!-- 통합 콘텐츠 -->
         <div class="unified-content">
-            <!-- 왼쪽 메인 콘텐츠 -->
-            <div class="main-content">
-                <h1 class="bill-title">의료법 일부개정법률안</h1>
-                
-                <!-- 법률안 정보 -->
-                <div class="bill-info">
-                    <div class="info-row">
-                        <span class="info-label">의안 번호:</span>
-                        <span class="info-value">9421</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">위원회:</span>
-                        <span class="info-value">보건복지위원회</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">발의연월일:</span>
-                        <span class="info-value">2024. 5. 17.</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">대표발의자:</span>
-                        <span class="info-value">김영선</span>
-                    </div>
-                </div>
-
-                <button class="view-detail-btn">의안 상세</button>
-
-                <!-- 찬성/반대 투표 -->
-                <div class="vote-section">
-                    <div class="vote-buttons">
-                        <button class="vote-btn agree" data-vote="agree">찬성</button>
-                        <button class="vote-btn disagree" data-vote="disagree">반대</button>
-                    </div>
+            <div class="content-grid">
+                <!-- 왼쪽 메인 콘텐츠 -->
+                <div class="main-content">
+                    <h1 class="bill-title">의료법 일부개정법률안</h1>
                     
-                    <div class="vote-counts">
-                        <div class="vote-count agree">
-                            <div class="vote-count-label">찬성</div>
-                            <div class="vote-count-number" id="agree-count">4842</div>
+                    <!-- 법률안 정보 -->
+                    <div class="bill-info">
+                        <div class="info-row">
+                            <span class="info-label">의안 번호:</span>
+                            <span class="info-value">9421</span>
                         </div>
-                        <div class="vote-count disagree">
-                            <div class="vote-count-label">반대</div>
-                            <div class="vote-count-number" id="disagree-count">5033</div>
+                        <div class="info-row">
+                            <span class="info-label">위원회:</span>
+                            <span class="info-value">보건복지위원회</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">발의연월일:</span>
+                            <span class="info-value">2024. 5. 17.</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">대표발의자:</span>
+                            <span class="info-value">김영선</span>
+                        </div>
+                    </div>
+
+                    <button class="view-detail-btn">의안 상세</button>
+                </div>
+
+                <!-- 오른쪽 사이드바 -->
+                <div class="sidebar">
+                    <!-- 조문의 의안 요약 -->
+                    <div class="bill-summary">
+                        <div class="summary-title">조문의 의안</div>
+                        <div class="summary-subtitle">(제안배경과)</div>
+                        
+                        <div class="summary-section">
+                            <div class="summary-section-title">관련 법률안</div>
+                            <ul class="summary-list">
+                                <li>아동복지시설 일부개정법률안</li>
+                                <li>가족돌봄등을 위한 휴식 지원 관련 법률안</li>
+                                <li>영유아보육법 일부개정법률안</li>
+                                <li>국민기초생활 일부개정법률안</li>
+                                <li>감염병의 예방 및 관리에 관한 법률 일부개정법률안</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- 댓글 섹션 -->
+            <!-- 찬성/반대 투표 (중앙 배치) -->
+            <div class="vote-section-centered">
+                <div class="vote-buttons">
+                    <button class="vote-btn agree" data-vote="agree">찬성</button>
+                    <button class="vote-btn disagree" data-vote="disagree">반대</button>
+                </div>
+                
+                <div class="vote-counts">
+                    <div class="vote-count agree">
+                        <div class="vote-count-label">찬성</div>
+                        <div class="vote-count-number" id="agree-count">4842</div>
+                    </div>
+                    <div class="vote-count disagree">
+                        <div class="vote-count-label">반대</div>
+                        <div class="vote-count-number" id="disagree-count">5033</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 댓글 섹션 (전체 너비) -->
+            <div class="full-width-section">
                 <div class="comments-section">
                     <h2 class="comments-title">법안 토론</h2>
                     
@@ -792,53 +844,36 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 오른쪽 사이드바 -->
-            <div class="sidebar">
-                <!-- 조문의 의안 요약 -->
-                <div class="bill-summary">
-                    <div class="summary-title">조문의 의안</div>
-                    <div class="summary-subtitle">(제안배경과)</div>
-                    
-                    <div class="summary-section">
-                        <div class="summary-section-title">관련 법률안</div>
-                        <ul class="summary-list">
-                            <li>아동복지시설 일부개정법률안</li>
-                            <li>가족돌봄등을 위한 휴식 지원 관련 법률안</li>
-                            <li>영유아보육법 일부개정법률안</li>
-                            <li>국민기초생활 일부개정법률안</li>
-                            <li>감염병의 예방 및 관리에 관한 법률 일부개정법률안</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
     <script>
         function goToHome() {
-            // 페이지를 새로고침하여 홈으로 돌아가기
-            window.location.href = 'index.html';
+            // 메인 페이지로 이동
+            alert('메인 페이지로 이동합니다.');
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = '/';
         }
 
         function goToMembersPage() {
-            window.location.href = 'NAlist.html';
+            // 국회의원 페이지로 이동
+            alert('국회의원 페이지로 이동합니다.');
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = '/members';
         }
 
         function geToBillsPage() {
-            window.location.href = 'LAWlist.html';
+            // 법률안 페이지로 이동
+            alert('법률안 페이지로 이동합니다.');
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = '/bills';
         }
 
         function goToProposalsPage() {
-           window.location.href = 'PROPlist.html';
-        }
-
-        function viewBillDetail(billId, billTitle) {
-            window.location.href = `LAWdetail.html/${billId}`;
-        }
-
-        function viewMemberDetail(memberId, memberName) {
-            window.location.href = `NAdetail.html/${memberId}`;
+            // 입법제안 페이지로 이동
+            alert('입법제안 페이지로 이동합니다.');
+            // 실제 구현 시에는 다음과 같이 페이지 이동
+            // window.location.href = '/proposals';
         }
 
         // API 설정
@@ -903,23 +938,7 @@
             document.querySelector('.info-row:nth-child(1) .info-value').textContent = bill.number;
             document.querySelector('.info-row:nth-child(2) .info-value').textContent = bill.committee;
             document.querySelector('.info-row:nth-child(3) .info-value').textContent = bill.proposeDate;
-            
-            // 대표발의자 정보 추가 (현재 3개만 있으므로 4번째 추가)
-            const billInfo = document.querySelector('.bill-info');
-            
-            // 대표발의자 행이 없다면 추가
-            if (billInfo.children.length === 3) {
-                const proposerRow = document.createElement('div');
-                proposerRow.className = 'info-row';
-                proposerRow.innerHTML = `
-                    <span class="info-label">대표발의자:</span>
-                    <span class="info-value">${bill.proposer}</span>
-                `;
-                billInfo.appendChild(proposerRow);
-            } else {
-                // 이미 있다면 업데이트
-                document.querySelector('.info-row:nth-child(4) .info-value').textContent = bill.proposer;
-            }
+            document.querySelector('.info-row:nth-child(4) .info-value').textContent = bill.proposer;
             
             // 전역 상태 업데이트
             currentBill = bill;
@@ -1015,6 +1034,9 @@
         const voteMessage = document.getElementById('vote-message');
         const agreeCountEl = document.getElementById('agree-count');
         const disagreeCountEl = document.getElementById('disagree-count');
+
+        // 답글 시스템 초기화
+        function initializeReplySystem() {
             // 답글 버튼 이벤트
             document.querySelectorAll('.reply-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
@@ -1210,6 +1232,7 @@
         function addComment(content, stance) {
             const commentItem = document.createElement('div');
             commentItem.className = 'comment-item';
+            commentItem.setAttribute('data-comment-id', commentCounter);
             
             const stanceText = stance === 'agree' ? '찬성' : '반대';
             const stanceClass = stance === 'agree' ? 'agree' : 'disagree';
@@ -1221,11 +1244,22 @@
                     <span class="comment-time">방금 전</span>
                 </div>
                 <div class="comment-content">${content}</div>
+                <div class="comment-actions">
+                    <button class="comment-action-btn reply-btn" data-comment-id="${commentCounter}">답글</button>
+                </div>
+                <div class="reply-form" id="reply-form-${commentCounter}">
+                    <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
+                    <button class="reply-submit" data-parent-id="${commentCounter}">답글 작성</button>
+                    <button class="reply-cancel">취소</button>
+                </div>
             `;
             
             // 맨 위에 새 댓글 추가
             commentsList.insertBefore(commentItem, commentsList.firstChild);
             commentCounter++;
+            
+            // 새 댓글에 이벤트 리스너 추가
+            initializeReplySystem();
             
             // 새 댓글 강조 효과
             commentItem.style.backgroundColor = '#e3f2fd';
