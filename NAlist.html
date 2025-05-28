@@ -29,6 +29,9 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -165,7 +168,7 @@
         }
 
         .table-row {
-            display: grid;pation
+            display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             padding: 18px 25px;
             border-bottom: 1px solid #e9ecef;
@@ -349,8 +352,8 @@
         <section class="party-section">
             <div class="party-tabs">
                 <a href="#" class="party-tab active" data-party="전체">전체</a>
-                <a href="#" class="party-tab" data-party="국민의 힘">국민의 힘</a>
-                <a href="#" class="party-tab" data-party="더불어 민주당">더불어 민주당</a>
+                <a href="#" class="party-tab" data-party="국민의힘">국민의힘</a>
+                <a href="#" class="party-tab" data-party="더불어민주당">더불어민주당</a>
                 <a href="#" class="party-tab" data-party="정의당">정의당</a>
                 <a href="#" class="party-tab" data-party="개혁신당">개혁신당</a>
                 <a href="#" class="party-tab" data-party="기타">기타</a>
@@ -393,42 +396,161 @@
     <script>
         // 페이지 이동 함수들
         function goToHome() {
-            // 페이지를 새로고침하여 홈으로 돌아가기
-            window.location.href = 'index.html';
+            alert('메인 페이지로 이동합니다.');
         }
 
         function goToMembersPage() {
-            window.location.href = 'NAlist.html';
+            alert('국회의원 페이지로 이동합니다.');
         }
 
         function geToBillsPage() {
-            window.location.href = 'LAWlist.html';
+            alert('법률안 페이지로 이동합니다.');
         }
 
         function goToProposalsPage() {
-           window.location.href = 'PROPlist.html';
+            alert('입법제안 페이지로 이동합니다.');
         }
 
         function viewBillDetail(billId, billTitle) {
-            window.location.href = `LAWdetail.html?billId=${billId}`;
+            alert(`${billTitle} 상세 페이지로 이동합니다.\n법률안 ID: ${billId}`);
         }
 
         function viewMemberDetail(memberId, memberName) {
-            window.location.href = `NAdetail.html?memberId=${memberId}`;
+            alert(`${memberName} 의원 상세 페이지로 이동합니다.\n의원 ID: ${memberId}`);
         }
 
         // API 설정
         const API_CONFIG = {
             baseUrl: 'https://open.assembly.go.kr/portal/openapi/nwvrqwxyaytdsfvhu',
-            key: '69e4e44944d642599c407265cef3443b', // 실제 API 키로 변경 필요
+            key: '69e4e44944d642599c407265cef3443b',
         };
+
+        // 모의 데이터 (API 연결 전까지 사용)
+        const MOCK_MEMBERS = [
+            {
+                MONA_CD: 'member_001',
+                HG_NM: '이재명',
+                POLY_NM: '더불어민주당',
+                BTH_DATE: '1964-12-22',
+                SEX_GBN_NM: '남',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_002', 
+                HG_NM: '안철수',
+                POLY_NM: '국민의당',
+                BTH_DATE: '1962-02-26',
+                SEX_GBN_NM: '남',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_003',
+                HG_NM: '김진표',
+                POLY_NM: '더불어민주당',
+                BTH_DATE: '1949-12-18',
+                SEX_GBN_NM: '남',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_004',
+                HG_NM: '박혜련',
+                POLY_NM: '국민의힘',
+                BTH_DATE: '1972-07-15',
+                SEX_GBN_NM: '여',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_005',
+                HG_NM: '박정미',
+                POLY_NM: '정의당',
+                BTH_DATE: '1971-03-08',
+                SEX_GBN_NM: '여',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_006',
+                HG_NM: '윤석열',
+                POLY_NM: '국민의힘',
+                BTH_DATE: '1960-12-18',
+                SEX_GBN_NM: '남',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_007',
+                HG_NM: '김기현',
+                POLY_NM: '국민의힘',
+                BTH_DATE: '1958-12-15',
+                SEX_GBN_NM: '남',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_008',
+                HG_NM: '추경호',
+                POLY_NM: '국민의힘',
+                BTH_DATE: '1962-04-27',
+                SEX_GBN_NM: '남',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_009',
+                HG_NM: '이정숙',
+                POLY_NM: '더불어민주당',
+                BTH_DATE: '1965-11-12',
+                SEX_GBN_NM: '여',
+                PHOTO_URL: ''
+            },
+            {
+                MONA_CD: 'member_010',
+                HG_NM: '강민국',
+                POLY_NM: '개혁신당',
+                BTH_DATE: '1975-08-22',
+                SEX_GBN_NM: '남',
+                PHOTO_URL: ''
+            }
+        ];
+
+        // 데이터 확인용 로그
+        console.log('모의 데이터 정당 목록:');
+        MOCK_MEMBERS.forEach(member => {
+            console.log(`${member.HG_NM}: "${member.POLY_NM}"`);
+        });
 
         // 현재 상태
         let currentParty = '전체';
         let currentPage = 1;
 
-        // 국회의원 정보 API 호출
+        // 국회의원 정보 API 호출 (모의 데이터 사용)
         async function fetchMembers(params = {}) {
+            // 로딩 시뮬레이션
+            await new Promise(resolve => setTimeout(resolve, 800));
+            
+            let filteredMembers = [...MOCK_MEMBERS];
+            
+            console.log('필터링 전 멤버 수:', filteredMembers.length); // 디버깅용
+            console.log('필터링 파라미터:', params); // 디버깅용
+            
+            // 정당별 필터링
+            if (params.POLY_NM && params.POLY_NM !== '전체') {
+                filteredMembers = filteredMembers.filter(member => {
+                    console.log(`${member.HG_NM}: ${member.POLY_NM} vs ${params.POLY_NM}`); // 디버깅용
+                    return member.POLY_NM === params.POLY_NM;
+                });
+            }
+            
+            console.log('필터링 후 멤버 수:', filteredMembers.length); // 디버깅용
+            
+            // 페이지네이션
+            const pageSize = 20; // 한 페이지에 20명씩 표시
+            const startIndex = (currentPage - 1) * pageSize;
+            const endIndex = startIndex + pageSize;
+            const paginatedMembers = filteredMembers.slice(startIndex, endIndex);
+            
+            return {
+                members: paginatedMembers,
+                totalCount: filteredMembers.length
+            };
+            
+            /* 실제 API 호출 코드 (나중에 사용)
             const defaultParams = {
                 Key: API_CONFIG.key,
                 Type: 'json',
@@ -454,6 +576,7 @@
                 console.error('국회의원 정보 가져오기 실패:', error);
                 return { members: [], totalCount: 0 };
             }
+            */
         }
 
         // 테이블 업데이트 함수
@@ -529,19 +652,38 @@
 
         // 페이지네이션 업데이트 함수
         function updatePagination(totalCount) {
-            const totalPages = Math.ceil(totalCount / 10);
+            const pageSize = 5; // fetchMembers와 동일하게 설정
+            const totalPages = Math.ceil(totalCount / pageSize);
             const pagination = document.querySelector('.pagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
             
             let paginationHTML = '';
             
-            const startPage = Math.max(1, currentPage - 4);
-            const endPage = Math.min(totalPages, startPage + 7);
+            // 이전 버튼
+            const prevDisabled = currentPage === 1 ? 'disabled' : '';
+            if (currentPage > 1) {
+                paginationHTML += `<a href="#" class="page-btn" data-page="${currentPage - 1}">‹</a>`;
+            }
+            
+            // 페이지 번호들
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, startPage + 4);
             
             for (let i = startPage; i <= endPage; i++) {
                 const activeClass = i === currentPage ? 'active' : '';
                 paginationHTML += `<a href="#" class="page-btn ${activeClass}" data-page="${i}">${i}</a>`;
             }
             
+            // 다음 버튼
+            if (currentPage < totalPages) {
+                paginationHTML += `<a href="#" class="page-btn" data-page="${currentPage + 1}">›</a>`;
+            }
+            
+            // 더보기 표시
             if (endPage < totalPages) {
                 paginationHTML += `<a href="#" class="page-btn dots">...</a>`;
             }
@@ -553,7 +695,7 @@
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
                     const page = parseInt(this.getAttribute('data-page'));
-                    if (page !== currentPage) {
+                    if (page !== currentPage && page >= 1 && page <= totalPages) {
                         currentPage = page;
                         loadCurrentData();
                     }
@@ -567,9 +709,12 @@
             
             const params = {};
             
+            // 정당 필터링 로직 수정
             if (currentParty && currentParty !== '전체') {
                 params.POLY_NM = currentParty;
             }
+            
+            console.log('현재 선택된 정당:', currentParty); // 디버깅용
             
             const result = await fetchMembers(params);
             updateMembersTable(result.members);
@@ -604,6 +749,8 @@
             tab.addEventListener('click', function(e) {
                 e.preventDefault();
                 
+                console.log('정당 탭 클릭됨:', this.getAttribute('data-party')); // 디버깅용
+                
                 // 모든 탭에서 active 클래스 제거
                 document.querySelectorAll('.party-tab').forEach(t => {
                     t.classList.remove('active');
@@ -614,7 +761,9 @@
                 
                 // 선택된 정당 업데이트
                 currentParty = this.getAttribute('data-party');
-                currentPage = 1;
+                currentPage = 1; // 페이지를 첫 페이지로 리셋
+                
+                console.log('업데이트된 현재 정당:', currentParty); // 디버깅용
                 
                 // 해당 정당의 국회의원 목록 로드
                 loadCurrentData();
