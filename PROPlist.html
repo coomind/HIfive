@@ -19,19 +19,16 @@
             line-height: 1.4;
         }
 
-        /* 헤더 */
+        /* 헤더 - 법률안 페이지와 동일한 스타일로 업데이트 */
         .header {
             background: white;
             border-bottom: 1px solid #e9ecef;
-            padding: 16px 24px;
             position: sticky;
             top: 0;
             z-index: 100;
-        }
-
-        .header-content {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -272,6 +269,14 @@
             .container {
                 padding: 30px 15px;
             }
+
+            .nav {
+                gap: 16px;
+            }
+
+            .header {
+                padding: 16px 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -288,17 +293,15 @@
 <body>
     <!-- 헤더 -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo" onclick="goToHome()">
-                <div class="logo-icon">⚖️</div>
-                <span>LAW.GG</span>
-            </div>
-            <nav class="nav">
-                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
-                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
-                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
-            </nav>
+        <div class="logo" onclick="goToHome()">
+            <div class="logo-icon">⚖️</div>
+            <span>LAW.GG</span>
         </div>
+        <nav class="nav">
+            <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+            <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+            <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
+        </nav>
     </header>
 
     <!-- 메인 컨테이너 -->
