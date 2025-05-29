@@ -27,6 +27,11 @@
             position: sticky;
             top: 0;
             z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -438,15 +443,17 @@
 <body>
     <!-- 헤더 -->
     <header class="header">
-        <div class="logo" onclick="goToHome()">
-            <div class="logo-icon">⚖️</div>
-            <span>LAW.GG</span>
+        <div class="header-content">
+            <div class="logo" onclick="goToHome()">
+                <div class="logo-icon">⚖️</div>
+                <span>LAW.GG</span>
+            </div>
+            <nav class="nav">
+                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
+            </nav>
         </div>
-        <nav class="nav">
-            <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
-            <div class="nav-item" onclick="geToBillsPage()">법률안</div>
-            <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
-        </nav>
     </header>
 
     <!-- 메인 컨테이너 -->
