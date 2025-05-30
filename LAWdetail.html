@@ -19,17 +19,16 @@
             line-height: 1.4;
         }
 
-        /* 헤더 */
+        /* 헤더 - 다른 페이지와 동일한 스타일로 수정 */
         .header {
-            background-color: white;
-            padding: 15px 0;
+            background: white;
             border-bottom: 1px solid #e9ecef;
-        }
-
-        .header-content {
+            position: sticky;
+            top: 0;
+            z-index: 100;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -38,10 +37,10 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             font-size: 20px;
-            font-weight: bold;
-            color: #333;
+            font-weight: 700;
+            color: #2c3e50;
             cursor: pointer;
             transition: opacity 0.2s ease;
         }
@@ -62,22 +61,22 @@
             font-weight: bold;
         }
 
-        .nav-menu {
+        .nav {
             display: flex;
-            gap: 30px;
+            gap: 24px;
         }
 
         .nav-item {
             color: #666;
             text-decoration: none;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
-            transition: color 0.2s;
             cursor: pointer;
+            transition: color 0.2s ease;
         }
 
         .nav-item:hover {
-            color: #333;
+            color: #3498db;
         }
 
         /* 메인 컨테이너 */
@@ -399,6 +398,34 @@
             color: #495057;
         }
 
+        .comment-action-btn.report-btn {
+            color: #dc3545;
+        }
+
+        .comment-action-btn.report-btn:hover {
+            color: #bd2130;
+        }
+
+        .comment-action-btn.report-btn.reported {
+            color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .comment-under-review {
+            background-color: #fff3cd !important;
+            border-left: 4px solid #ffc107 !important;
+        }
+
+        .under-review-badge {
+            background-color: #ffc107;
+            color: #856404;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-left: 5px;
+        }
+
         .reply-form {
             margin-top: 15px;
             padding: 15px;
@@ -618,6 +645,12 @@
         }
 
         /* 반응형 디자인 */
+        @media (max-width: 1024px) {
+            .header {
+                padding: 16px 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .content-grid {
                 grid-template-columns: 1fr;
@@ -640,23 +673,43 @@
             .bill-title {
                 font-size: 20px;
             }
+
+            .nav {
+                gap: 16px;
+            }
+
+            .nav-item {
+                font-size: 14px;
+            }
+
+            .header {
+                padding: 16px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                gap: 20px;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- 헤더 -->
     <header class="header">
-        <div class="header-content">
-            <div class="logo" onclick="goToHome()">
-                <div class="logo-icon">⚖️</div>
-                <span>LAW.GG</span>
-            </div>
-            <nav class="nav-menu">
-                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
-                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
-                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
-            </nav>
+        <div class="logo" onclick="goToHome()">
+            <div class="logo-icon">⚖️</div>
+            <span>LAW.GG</span>
         </div>
+        <nav class="nav">
+            <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+            <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+            <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
+        </nav>
     </header>
 
     <!-- 메인 컨테이너 -->
@@ -751,7 +804,7 @@
 
                     <div class="comments-list" id="comments-list">
                         <!-- 기존 댓글들 -->
-                        <div class="comment-item" data-comment-id="1">
+                        <div class="comment-item" data-comment-id="1" data-report-count="0">
                             <div class="comment-header">
                                 <span class="comment-author">익명1</span>
                                 <span class="comment-stance agree">찬성</span>
@@ -760,6 +813,7 @@
                             <div class="comment-content">정말 좋은 정책 같습니다.</div>
                             <div class="comment-actions">
                                 <button class="comment-action-btn reply-btn" data-comment-id="1">답글</button>
+                                <button class="comment-action-btn report-btn" data-comment-id="1">신고</button>
                             </div>
                             <div class="reply-form" id="reply-form-1">
                                 <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
@@ -769,7 +823,7 @@
                         </div>
 
                         <!-- 대댓글 예시 -->
-                        <div class="comment-item reply" data-comment-id="2" data-parent-id="1">
+                        <div class="comment-item reply" data-comment-id="2" data-parent-id="1" data-report-count="0">
                             <div class="comment-header">
                                 <span class="comment-author">익명5</span>
                                 <span class="comment-stance agree">찬성</span>
@@ -778,6 +832,7 @@
                             <div class="comment-content">@익명1 저도 동감합니다!</div>
                             <div class="comment-actions">
                                 <button class="comment-action-btn reply-btn" data-comment-id="2">답글</button>
+                                <button class="comment-action-btn report-btn" data-comment-id="2">신고</button>
                             </div>
                             <div class="reply-form" id="reply-form-2">
                                 <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
@@ -786,7 +841,7 @@
                             </div>
                         </div>
 
-                        <div class="comment-item" data-comment-id="3">
+                        <div class="comment-item" data-comment-id="3" data-report-count="0">
                             <div class="comment-header">
                                 <span class="comment-author">익명2</span>
                                 <span class="comment-stance agree">찬성</span>
@@ -795,6 +850,7 @@
                             <div class="comment-content">응니다.</div>
                             <div class="comment-actions">
                                 <button class="comment-action-btn reply-btn" data-comment-id="3">답글</button>
+                                <button class="comment-action-btn report-btn" data-comment-id="3">신고</button>
                             </div>
                             <div class="reply-form" id="reply-form-3">
                                 <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
@@ -803,7 +859,7 @@
                             </div>
                         </div>
 
-                        <div class="comment-item" data-comment-id="4">
+                        <div class="comment-item" data-comment-id="4" data-report-count="2">
                             <div class="comment-header">
                                 <span class="comment-author">익명3</span>
                                 <span class="comment-stance disagree">반대</span>
@@ -812,6 +868,7 @@
                             <div class="comment-content">이 법률은 조금 더 검토해 보세요.</div>
                             <div class="comment-actions">
                                 <button class="comment-action-btn reply-btn" data-comment-id="4">답글</button>
+                                <button class="comment-action-btn report-btn" data-comment-id="4">신고 (2)</button>
                             </div>
                             <div class="reply-form" id="reply-form-4">
                                 <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
@@ -820,15 +877,17 @@
                             </div>
                         </div>
 
-                        <div class="comment-item" data-comment-id="5">
+                        <div class="comment-item comment-under-review" data-comment-id="5" data-report-count="5">
                             <div class="comment-header">
                                 <span class="comment-author">익명4</span>
                                 <span class="comment-stance disagree">반대</span>
                                 <span class="comment-time">23분</span>
+                                <span class="under-review-badge">검토 중</span>
                             </div>
                             <div class="comment-content">개정하기로 크게 부처님 업무가 깊어질 것 같아요.</div>
                             <div class="comment-actions">
                                 <button class="comment-action-btn reply-btn" data-comment-id="5">답글</button>
+                                <button class="comment-action-btn report-btn" data-comment-id="5">신고 (5)</button>
                             </div>
                             <div class="reply-form" id="reply-form-5">
                                 <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
@@ -1023,6 +1082,16 @@
             disagree: 5033
         };
 
+        // 신고 관련 상태
+        let reportedComments = new Set(); // 사용자가 신고한 댓글 ID들
+        let commentReports = {
+            1: 0,
+            2: 0, 
+            3: 0,
+            4: 2,
+            5: 5
+        }; // 댓글별 신고 수
+
         // DOM 요소들
         const voteButtons = document.querySelectorAll('.vote-btn');
         const commentInput = document.getElementById('comment-input');
@@ -1086,6 +1155,89 @@
                     replyForm.querySelector('.reply-input').value = '';
                 });
             });
+
+            // 신고 버튼 이벤트
+            document.querySelectorAll('.report-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const commentId = this.getAttribute('data-comment-id');
+                    reportComment(commentId);
+                });
+            });
+        }
+
+        // 댓글 신고 기능
+        function reportComment(commentId) {
+            // 이미 신고한 댓글인지 확인
+            if (reportedComments.has(commentId)) {
+                alert('이미 신고한 댓글입니다.');
+                return;
+            }
+            
+            // 신고 확인
+            if (!confirm('이 댓글을 신고하시겠습니까?\n부적절한 내용이 포함된 댓글만 신고해주세요.')) {
+                return;
+            }
+            
+            // 신고 처리
+            reportedComments.add(commentId);
+            
+            // 신고 수 증가
+            if (!commentReports[commentId]) {
+                commentReports[commentId] = 0;
+            }
+            commentReports[commentId]++;
+            
+            // UI 업데이트
+            updateReportButton(commentId);
+            updateCommentStatus(commentId);
+            
+            alert('신고가 접수되었습니다. 관리자 검토 후 적절한 조치가 취해집니다.');
+        }
+
+        // 신고 버튼 UI 업데이트
+        function updateReportButton(commentId) {
+            const reportBtn = document.querySelector(`[data-comment-id="${commentId}"].report-btn`);
+            const reportCount = commentReports[commentId];
+            
+            if (reportBtn) {
+                if (reportedComments.has(commentId)) {
+                    reportBtn.classList.add('reported');
+                    reportBtn.textContent = '신고됨';
+                } else if (reportCount > 0) {
+                    reportBtn.textContent = `신고 (${reportCount})`;
+                } else {
+                    reportBtn.textContent = '신고';
+                }
+            }
+        }
+
+        // 댓글 상태 업데이트 (검토 중 표시)
+        function updateCommentStatus(commentId) {
+            const commentItem = document.querySelector(`[data-comment-id="${commentId}"]`);
+            const reportCount = commentReports[commentId];
+            
+            if (commentItem && reportCount >= 3) {
+                // 검토 중 상태로 변경
+                commentItem.classList.add('comment-under-review');
+                commentItem.setAttribute('data-report-count', reportCount);
+                
+                // 검토 중 배지 추가 (아직 없는 경우에만)
+                const header = commentItem.querySelector('.comment-header');
+                if (!header.querySelector('.under-review-badge')) {
+                    const badge = document.createElement('span');
+                    badge.className = 'under-review-badge';
+                    badge.textContent = '검토 중';
+                    header.appendChild(badge);
+                }
+            }
+        }
+
+        // 초기 신고 버튼 상태 설정
+        function initializeReportButtons() {
+            Object.keys(commentReports).forEach(commentId => {
+                updateReportButton(commentId);
+                updateCommentStatus(commentId);
+            });
         }
 
         // 답글 추가 함수
@@ -1097,6 +1249,7 @@
             replyItem.className = 'comment-item reply';
             replyItem.setAttribute('data-comment-id', commentCounter);
             replyItem.setAttribute('data-parent-id', parentId);
+            replyItem.setAttribute('data-report-count', '0');
             
             replyItem.innerHTML = `
                 <div class="comment-header">
@@ -1107,6 +1260,7 @@
                 <div class="comment-content">${content}</div>
                 <div class="comment-actions">
                     <button class="comment-action-btn reply-btn" data-comment-id="${commentCounter}">답글</button>
+                    <button class="comment-action-btn report-btn" data-comment-id="${commentCounter}">신고</button>
                 </div>
                 <div class="reply-form" id="reply-form-${commentCounter}">
                     <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
@@ -1132,6 +1286,9 @@
             } else {
                 insertAfter.parentNode.appendChild(replyItem);
             }
+            
+            // 신고 상태 초기화
+            commentReports[commentCounter] = 0;
             
             commentCounter++;
             
@@ -1230,6 +1387,7 @@
             const commentItem = document.createElement('div');
             commentItem.className = 'comment-item';
             commentItem.setAttribute('data-comment-id', commentCounter);
+            commentItem.setAttribute('data-report-count', '0');
             
             const stanceText = stance === 'agree' ? '찬성' : '반대';
             const stanceClass = stance === 'agree' ? 'agree' : 'disagree';
@@ -1243,6 +1401,7 @@
                 <div class="comment-content">${content}</div>
                 <div class="comment-actions">
                     <button class="comment-action-btn reply-btn" data-comment-id="${commentCounter}">답글</button>
+                    <button class="comment-action-btn report-btn" data-comment-id="${commentCounter}">신고</button>
                 </div>
                 <div class="reply-form" id="reply-form-${commentCounter}">
                     <textarea class="reply-input" placeholder="답글을 작성해주세요..."></textarea>
@@ -1253,6 +1412,10 @@
             
             // 맨 위에 새 댓글 추가
             commentsList.insertBefore(commentItem, commentsList.firstChild);
+            
+            // 신고 상태 초기화
+            commentReports[commentCounter] = 0;
+            
             commentCounter++;
             
             // 새 댓글에 이벤트 리스너 추가
@@ -1289,6 +1452,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             disableComments();
             initializeReplySystem();
+            initializeReportButtons();
             
             // 페이지 로드 시 법률안 정보 가져오기
             const billId = getBillIdFromUrl();
