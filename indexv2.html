@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LawGG - 국회 정보 플랫폼</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* Header - 첫 번째 HTML과 동일한 스타일로 수정 */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: #3498db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item:hover {
+            color: #3498db;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 80px 24px;
+            text-align: center;
+            background: #f8f9fa;
+        }
+
+        .main-logo {
+            margin-bottom: 40px;
+        }
+
+        .main-logo-icon {
+            width: 120px;
+            height: 120px;
+            background: #2c3e50;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .main-logo-text {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .main-logo-subtitle {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-left: 16px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 60px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: #3498db;
+        }
+
+        .search-btn {
+            padding: 12px 24px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background: #34495e;
+        }
+
+        /* Content Sections */
+        .content-sections {
+            background: white;
+            padding: 40px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .section-list {
+            list-style: none;
+        }
+
+        .section-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+            color: #555;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+            margin: 0 -8px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .section-list li:hover {
+            color: #3498db;
+            background-color: #f8f9fa;
+            transform: translateX(4px);
+        }
+
+        .section-list li:last-child {
+            border-bottom: none;
+        }
+
+        .list-number {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+        }
+
+        .view-count {
+            margin-left: auto;
+            font-size: 12px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .bill-info, .member-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .bill-title, .member-name {
+            font-weight: 500;
+        }
+
+        .bill-status, .member-party {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .member-avatar {
+            width: 24px;
+            height: 24px;
+            background: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .header {
+                padding: 16px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-sections {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 16px;
+            }
+
+            .main-content {
+                padding: 60px 16px;
+            }
+
+            .search-container {
+                flex-direction: column;
+                padding: 0 16px;
+            }
+
+            .header {
+                padding: 16px 15px;
+            }
+
+            .nav {
+                gap: 16px;
+            }
+
+            .nav-item {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                gap: 20px;
+            }
+            
+            .nav-item {
+                font-size: 14px;
+            }
+        }
+
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo" onclick="goToHome()">
+                <div class="logo-icon">⚖️</div>
+                <span>LAW.GG</span>
+            </div>
+            <nav class="nav">
+                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <section class="main-content">
+            <div class="main-logo">
+                <div class="main-logo-icon">
+                    <span class="main-logo-text">⚖️</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <span class="main-logo-subtitle">LAW.GG</span>
+                </div>
+            </div>
+
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                <button class="search-btn" onclick="performSearch()">검색</button>
+            </div>
+        </section>
+
+        <!-- Content Sections -->
+        <div class="content-sections">
+            <!-- 화제의 법률안 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon">📋</div>
+                    화제의 법률안
+                </h2>
+                <ul class="section-list">
+                    {% for bill in trending_bills %}
+                    <li onclick="viewBillDetail('{{ bill.id }}', '{{ bill.title }}')">
+                        <div class="list-number">{{ loop.index }}</div>
+                        <div class="bill-info">
+                            <span class="bill-title">{{ bill.title }}</span>
+                            {% if bill.status %}
+                            <span class="bill-status">{{ bill.status }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="view-count">{{ "{:,}".format(bill.view_count) }}회</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- 화제의 국회의원 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon">👤</div>
+                    화제의 국회의원
+                </h2>
+                <ul class="section-list">
+                    {% for member in trending_members %}
+                    <li onclick="viewMemberDetail('{{ member.id }}', '{{ member.name }}')">
+                        <div class="list-number">{{ loop.index }}</div>
+                        <div class="member-avatar">{{ member.name[0] }}</div>
+                        <div class="member-info">
+                            <span class="member-name">{{ member.name }}</span>
+                            {% if member.party %}
+                            <span class="member-party">{{ member.party }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="view-count">{{ "{:,}".format(member.view_count) }}회</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function goToHome() {
+            // 페이지를 새로고침하여 홈으로 돌아가기
+            window.location.href = 'index.html';
+        }
+
+        function goToMembersPage() {
+            window.location.href = 'NAlist.html';
+        }
+
+        function geToBillsPage() {
+            window.location.href = 'LAWlist.html';
+        }
+
+        function goToProposalsPage() {
+           window.location.href = 'PROPlist.html';
+        }
+
+        function viewBillDetail(billId, billTitle) {
+            window.location.href = `LAWdetail.html/${billId}`;
+        }
+
+        function viewMemberDetail(memberId, memberName) {
+            window.location.href = `NAdetail.html/${memberId}`;
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                alert(`"${query}"에 대한 검색을 실행합니다.`);
+            } else {
+                alert('검색어를 입력해주세요.');
+            }
+        }
+
+        // Enter key support for search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+    </script>
+</body></html>
