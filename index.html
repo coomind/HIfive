@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Law.GG - 법률안명</title>
+    <title>LawGG - 국회 정보 플랫폼</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,12 +14,19 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
+            background: #f8f9fa;
             color: #333;
-            line-height: 1.4;
+            line-height: 1.6;
         }
 
-        /* 헤더 - 두 번째 HTML과 동일한 스타일로 수정 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+        }
+
+        /* Header */
         .header {
             background: white;
             border-bottom: 1px solid #e9ecef;
@@ -27,9 +34,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .logo {
@@ -77,448 +81,369 @@
             color: #3498db;
         }
 
-        /* 메인 컨테이너 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 50px 20px;
-            width: 100%;
+        /* Main Content */
+        .main-content {
+            padding: 80px 24px;
+            text-align: center;
+            background: #f8f9fa;
         }
 
-        /* 제목과 검색 */
-        .title-section {
-            display: flex;
-            justify-content: center;
+        .main-logo {
+            margin-bottom: 40px;
+        }
+
+        .main-logo-icon {
+            width: 120px;
+            height: 120px;
+            background: #2c3e50;
+            border-radius: 12px;
+            display: inline-flex;
             align-items: center;
-            gap: 30px;
-            margin-bottom: 50px;
+            justify-content: center;
+            margin-bottom: 16px;
+            position: relative;
         }
 
-        .page-title {
-            font-size: 36px;
+        .main-logo-text {
+            color: white;
+            font-size: 24px;
             font-weight: 700;
-            color: #333;
+        }
+
+        .main-logo-subtitle {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-left: 16px;
         }
 
         .search-container {
+            max-width: 600px;
+            margin: 0 auto 60px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: #3498db;
+        }
+
+        .search-btn {
+            padding: 12px 24px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .search-btn:hover {
+            background: #34495e;
+        }
+
+        /* Content Sections */
+        .content-sections {
+            background: white;
+            padding: 40px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 24px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .search-input {
-            width: 300px;
-            height: 45px;
-            padding: 0 20px;
-            border: 1px solid #dee2e6;
-            border-radius: 25px;
-            font-size: 15px;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            background-color: white;
-        }
-
-        .search-input:focus {
-            border-color: #495057;
-            box-shadow: 0 0 0 3px rgba(73, 80, 87, 0.1);
-        }
-
-        .search-input::placeholder {
-            color: #adb5bd;
-        }
-
-        .search-btn {
-            background-color: #495057;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            height: 45px;
-            white-space: nowrap;
-        }
-
-        .search-btn:hover {
-            background-color: #343a40;
-        }
-
-        /* 위원회 카테고리 */
-        .committee-section {
-            margin-bottom: 50px;
-        }
-
-        .committee-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .committee-grid:last-child {
-            margin-bottom: 0;
-        }
-
-        .committee-item {
-            background-color: white;
-            border: 1px solid #dee2e6;
-            border-radius: 6px;
-            padding: 20px 12px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            color: #495057;
-            line-height: 1.3;
-            min-height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .committee-item:hover {
-            background-color: #f8f9fa;
-            border-color: #adb5bd;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .committee-item.active {
-            background-color: #495057;
-            color: white;
-            border-color: #495057;
-        }
-
-        /* 법률안 테이블 */
-        .bills-section {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            border: 1px solid #dee2e6;
-        }
-
-        .table-header {
-            background-color: #f8f9fa;
-            display: grid;
-            grid-template-columns: 140px 1fr 140px 140px 160px;
-            padding: 18px 30px;
-            font-weight: 600;
-            font-size: 14px;
-            color: #495057;
-            border-bottom: 1px solid #e9ecef;
-        }
-
-        .table-row {
-            display: grid;
-            grid-template-columns: 140px 1fr 140px 140px 160px;
-            padding: 18px 30px;
-            border-top: 1px solid #e9ecef;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            text-decoration: none;
-            color: #333;
-            align-items: center;
-        }
-
-        .table-row:hover {
-            background-color: #f8f9fa;
-        }
-
-        .bill-number {
-            font-weight: 600;
-            color: #495057;
-            font-size: 14px;
-        }
-
-        .bill-title {
-            font-size: 14px;
-            font-weight: 500;
-            line-height: 1.4;
-            color: #333;
-            padding-right: 20px;
-        }
-
-        .bill-date {
-            font-size: 13px;
-            color: #6c757d;
-            font-weight: 500;
-        }
-
-        .bill-court {
-            font-size: 13px;
-            color: #6c757d;
-            font-weight: 500;
-        }
-
-        .bill-status {
-            font-size: 13px;
-            color: #6c757d;
-            font-weight: 500;
-        }
-
-        /* 로딩 스피너 */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #495057;
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: #3498db;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-right: 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading-container {
-            padding: 60px;
-            text-align: center;
-            color: #666;
-        }
-
-        .no-results {
-            padding: 60px;
-            text-align: center;
-            color: #666;
-            font-size: 16px;
-        }
-
-        /* 페이지네이션 */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 40px;
-        }
-
-        .page-btn {
-            width: 40px;
-            height: 40px;
-            border: 1px solid #dee2e6;
-            background-color: white;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            color: #495057;
-            transition: all 0.2s;
-            border-radius: 4px;
-        }
-
-        .page-btn:hover {
-            background-color: #e9ecef;
-            border-color: #adb5bd;
-        }
-
-        .page-btn.active {
-            background-color: #495057;
             color: white;
-            border-color: #495057;
+            font-size: 12px;
+            font-weight: bold;
         }
 
-        .page-btn.disabled {
-            cursor: not-allowed;
-            opacity: 0.5;
+        .section-list {
+            list-style: none;
         }
 
-        .page-btn.disabled:hover {
-            background-color: white;
-            border-color: #dee2e6;
-        }
-
-        /* 상태 표시 */
-        .status-bar {
+        .section-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+            color: #555;
+            font-size: 15px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            padding: 15px 0;
-            color: #666;
-            font-size: 14px;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+            margin: 0 -8px;
+            padding-left: 8px;
+            padding-right: 8px;
         }
 
-        .results-count {
+        .section-list li:hover {
+            color: #3498db;
+            background-color: #f8f9fa;
+            transform: translateX(4px);
+        }
+
+        .section-list li:last-child {
+            border-bottom: none;
+        }
+
+        .list-number {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(52, 152, 219, 0.3);
+        }
+
+        .view-count {
+            margin-left: auto;
+            font-size: 12px;
+            color: #999;
             font-weight: 500;
         }
 
-        .current-filter {
-            color: #495057;
-            font-weight: 600;
+        .bill-info, .member-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
-        /* 반응형 디자인 */
-        @media (max-width: 1024px) {
-            .committee-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .table-header, .table-row {
-                grid-template-columns: 120px 1fr 120px 120px 140px;
-                padding: 15px 20px;
-            }
-
-            .title-section {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .search-input {
-                width: 250px;
-            }
+        .bill-title, .member-name {
+            font-weight: 500;
         }
 
+        .bill-status, .member-party {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .member-avatar {
+            width: 24px;
+            height: 24px;
+            background: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #666;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .committee-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .table-header, .table-row {
-                grid-template-columns: 100px 1fr 100px;
-                gap: 10px;
-                padding: 12px 15px;
-            }
-            
-            .bill-court, .bill-status {
-                display: none;
+            .content-sections {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px 16px;
             }
 
-            .page-title {
-                font-size: 28px;
+            .main-content {
+                padding: 60px 16px;
             }
 
-            .container {
-                padding: 30px 15px;
+            .search-container {
+                flex-direction: column;
+                padding: 0 16px;
             }
 
-            .search-input {
-                width: 200px;
+            .header {
+                padding: 16px;
             }
 
             .nav {
                 gap: 16px;
             }
-
-            .header {
-                padding: 16px 15px;
-            }
         }
 
-        @media (max-width: 480px) {
-            .committee-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .nav {
-                gap: 20px;
-            }
-            
-            .nav-item {
-                font-size: 14px;
-            }
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-            .search-container {
-                flex-direction: column;
-                gap: 12px;
-            }
+        .section {
+            animation: fadeIn 0.6s ease-out;
+        }
 
-            .search-input {
-                width: 100%;
-                max-width: 300px;
-            }
+        .section:nth-child(2) {
+            animation-delay: 0.2s;
         }
     </style>
 </head>
 <body>
-    <!-- 헤더 -->
-    <header class="header">
-        <div class="logo" onclick="goToHome()">
-            <div class="logo-icon">⚖️</div>
-            <span>LAW.GG</span>
-        </div>
-        <nav class="nav">
-            <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
-            <div class="nav-item" onclick="geToBillsPage()">법률안</div>
-            <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
-        </nav>
-    </header>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo" onclick="goToHome()">
+                <div class="logo-icon">⚖️</div>
+                <span>LAW.GG</span>
+            </div>
+            <nav class="nav">
+                <div class="nav-item" onclick="goToMembersPage()">국회의원</div>
+                <div class="nav-item" onclick="geToBillsPage()">법률안</div>
+                <div class="nav-item" onclick="goToProposalsPage()">입법제안</div>
+            </nav>
+        </header>
 
-    <!-- 메인 컨테이너 -->
-    <main class="container">
-        <!-- 제목과 검색 -->
-        <div class="title-section">
-            <h1 class="page-title">법률안명</h1>
+        <!-- Main Content -->
+        <section class="main-content">
+            <div class="main-logo">
+                <div class="main-logo-icon">
+                    <span class="main-logo-text">⚖️</span>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <span class="main-logo-subtitle">LAW.GG</span>
+                </div>
+            </div>
+
             <div class="search-container">
-                <input type="text" class="search-input" placeholder="법률안을 검색하세요">
-                <button class="search-btn">검색</button>
-            </div>
-        </div>
-
-        <!-- 위원회 카테고리 -->
-        <section class="committee-section">
-            <div class="committee-grid">
-                <button class="committee-item" data-committee="">전체</button>
-                <button class="committee-item" data-committee="국회운영위원회">국회운영위원회</button>
-                <button class="committee-item" data-committee="기획재정위원회">기획재정위원회</button>
-                <button class="committee-item" data-committee="외교통일위원회">외교통일위원회</button>
-                <button class="committee-item" data-committee="문화체육관광위원회">문화체육관광위원회</button>
-                <button class="committee-item" data-committee="보건복지위원회">보건복지위원회</button>
-                <button class="committee-item" data-committee="정보위원회">정보위원회</button>
-                <button class="committee-item" data-committee="법제사법위원회">법제사법위원회</button>
-                <button class="committee-item" data-committee="교육위원회">교육위원회</button>
-                <button class="committee-item" data-committee="국방위원회">국방위원회</button>
-                <button class="committee-item" data-committee="행정안전위원회">행정안전위원회</button>
-                <button class="committee-item" data-committee="환경노동위원회">환경노동위원회</button>
-                <button class="committee-item" data-committee="여성가족위원회">여성가족위원회</button>
-                <button class="committee-item" data-committee="정무위원회">정무위원회</button>
-                <button class="committee-item" data-committee="과학기술정보방송통신위원회">과기정통위</button>
-                <button class="committee-item" data-committee="국토교통위원회">국토교통위원회</button>
-                <button class="committee-item" data-committee="예산결산특별위원회">예산결산특위</button>
-                <button class="committee-item" data-committee="산업통상자원중소벤처기업위원회">산업통상자원위</button>
+                <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                <button class="search-btn" onclick="performSearch()">검색</button>
             </div>
         </section>
 
-        <!-- 상태 바 -->
-        <div class="status-bar">
-            <div class="results-count" id="resultsCount">검색 결과를 불러오는 중...</div>
-            <div class="current-filter" id="currentFilter"></div>
-        </div>
-
-        <!-- 법률안 테이블 -->
-        <section class="bills-section">
-            <div class="table-header">
-                <div>의안번호</div>
-                <div>의안명</div>
-                <div>제안일자</div>
-                <div>제안자</div>
-                <div>상임위원회</div>
+        <!-- Content Sections -->
+        <div class="content-sections">
+            <!-- 화제의 법률안 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon">📋</div>
+                    화제의 법률안
+                </h2>
+                <ul class="section-list">
+                    <li onclick="viewBillDetail('bill_001', '국회법 일부개정 법률안')">
+                        <div class="list-number">1</div>
+                        <div class="bill-info">
+                            <span class="bill-title">국회법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">12,458회</span>
+                    </li>
+                    <li onclick="viewBillDetail('bill_002', '의료법 일부개정 법률안')">
+                        <div class="list-number">2</div>
+                        <div class="bill-info">
+                            <span class="bill-title">의료법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">9,247회</span>
+                    </li>
+                    <li onclick="viewBillDetail('bill_003', '아동복지법 일부개정 법률안')">
+                        <div class="list-number">3</div>
+                        <div class="bill-info">
+                            <span class="bill-title">아동복지법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">8,932회</span>
+                    </li>
+                    <li onclick="viewBillDetail('bill_004', '교육기본법 일부개정 법률안')">
+                        <div class="list-number">4</div>
+                        <div class="bill-info">
+                            <span class="bill-title">교육기본법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">7,821회</span>
+                    </li>
+                    <li onclick="viewBillDetail('bill_005', '국민연금법 일부개정 법률안')">
+                        <div class="list-number">5</div>
+                        <div class="bill-info">
+                            <span class="bill-title">국민연금법 일부개정 법률안</span>
+                        </div>
+                        <span class="view-count">6,543회</span>
+                    </li>
+                </ul>
             </div>
 
-            <div class="loading-container">
-                <div class="loading-spinner"></div>
-                데이터를 불러오는 중입니다...
+            <!-- 화제의 국회의원 -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon">👤</div>
+                    화제의 국회의원
+                </h2>
+                <ul class="section-list">
+                    <li onclick="viewMemberDetail('member_001', '이재명')">
+                        <div class="list-number">1</div>
+                        <div class="member-avatar">이</div>
+                        <div class="member-info">
+                            <span class="member-name">이재명</span>
+                        </div>
+                        <span class="view-count">18,234회</span>
+                    </li>
+                    <li onclick="viewMemberDetail('member_002', '안철수')">
+                        <div class="list-number">2</div>
+                        <div class="member-avatar">안</div>
+                        <div class="member-info">
+                            <span class="member-name">안철수</span>
+                        </div>
+                        <span class="view-count">15,672회</span>
+                    </li>
+                    <li onclick="viewMemberDetail('member_003', '김진표')">
+                        <div class="list-number">3</div>
+                        <div class="member-avatar">김</div>
+                        <div class="member-info">
+                            <span class="member-name">김진표</span>
+                        </div>
+                        <span class="view-count">13,921회</span>
+                    </li>
+                    <li onclick="viewMemberDetail('member_004', '박혜련')">
+                        <div class="list-number">4</div>
+                        <div class="member-avatar">박</div>
+                        <div class="member-info">
+                            <span class="member-name">박혜련</span>
+                        </div>
+                        <span class="view-count">11,458회</span>
+                    </li>
+                    <li onclick="viewMemberDetail('member_005', '박정미')">
+                        <div class="list-number">5</div>
+                        <div class="member-avatar">박</div>
+                        <div class="member-info">
+                            <span class="member-name">박정미</span>
+                        </div>
+                        <span class="view-count">9,876회</span>
+                    </li>
+                </ul>
             </div>
-        </section>
-
-        <!-- 페이지네이션 -->
-        <div class="pagination" id="pagination">
-            <!-- 페이지네이션은 JavaScript로 동적 생성 -->
         </div>
-    </main>
+    </div>
 
     <script>
-        // 페이지 이동 함수들 - 메인 페이지와 동일하게 수정
         function goToHome() {
+            // 페이지를 새로고침하여 홈으로 돌아가기
             window.location.href = 'index.html';
         }
 
@@ -542,250 +467,21 @@
             window.location.href = `NAdetail.html/${memberId}`;
         }
 
-        // 모의 데이터
-        const MOCK_DATA = {
-            bills: [
-                {
-                    BILL_ID: '1',
-                    BILL_NO: '2024001',
-                    BILL_NAME: '개인정보 보호법 일부개정법률안',
-                    PROPOSE_DT: '2024-01-15',
-                    RST_PROPOSER: '김○○의원 등 10인',
-                    COMMITTEE: '정보위원회'
-                },
-                {
-                    BILL_ID: '2',
-                    BILL_NO: '2024002',
-                    BILL_NAME: '근로기준법 일부개정법률안',
-                    PROPOSE_DT: '2024-01-20',
-                    RST_PROPOSER: '이○○의원 등 15인',
-                    COMMITTEE: '환경노동위원회'
-                },
-                {
-                    BILL_ID: '3',
-                    BILL_NO: '2024003',
-                    BILL_NAME: '교육기본법 일부개정법률안',
-                    PROPOSE_DT: '2024-02-01',
-                    RST_PROPOSER: '박○○의원 등 8인',
-                    COMMITTEE: '교육위원회'
-                },
-                {
-                    BILL_ID: '4',
-                    BILL_NO: '2024004',
-                    BILL_NAME: '의료법 일부개정법률안',
-                    PROPOSE_DT: '2024-02-10',
-                    RST_PROPOSER: '정○○의원 등 12인',
-                    COMMITTEE: '보건복지위원회'
-                },
-                {
-                    BILL_ID: '5',
-                    BILL_NO: '2024005',
-                    BILL_NAME: '국세기본법 일부개정법률안',
-                    PROPOSE_DT: '2024-02-15',
-                    RST_PROPOSER: '최○○의원 등 20인',
-                    COMMITTEE: '기획재정위원회'
-                }
-            ]
-        };
-
-        // 전역 변수
-        let currentPage = 1;
-        let currentCommittee = '';
-        let currentSearchTerm = '';
-        let isLoading = false;
-
-        // API 호출 시뮬레이션
-        async function fetchBills(params = {}) {
-            await new Promise(resolve => setTimeout(resolve, 800));
-            
-            let filteredBills = [...MOCK_DATA.bills];
-            
-            if (params.committee && params.committee !== '') {
-                filteredBills = filteredBills.filter(bill => 
-                    bill.COMMITTEE.includes(params.committee)
-                );
-            }
-            
-            if (params.searchTerm) {
-                filteredBills = filteredBills.filter(bill =>
-                    bill.BILL_NAME.toLowerCase().includes(params.searchTerm.toLowerCase()) ||
-                    bill.RST_PROPOSER.toLowerCase().includes(params.searchTerm.toLowerCase())
-                );
-            }
-            
-            const pageSize = 5;
-            const startIndex = (params.page - 1) * pageSize;
-            const endIndex = startIndex + pageSize;
-            const paginatedBills = filteredBills.slice(startIndex, endIndex);
-            
-            return {
-                bills: paginatedBills,
-                totalCount: filteredBills.length
-            };
-        }
-
-        // 테이블 업데이트
-        function updateTable(bills) {
-            const billsSection = document.querySelector('.bills-section');
-            
-            let tableHTML = `
-                <div class="table-header">
-                    <div>의안번호</div>
-                    <div>의안명</div>
-                    <div>제안일자</div>
-                    <div>제안자</div>
-                    <div>상임위원회</div>
-                </div>
-            `;
-
-            if (bills && bills.length > 0) {
-                bills.forEach(bill => {
-                    const billNo = bill.BILL_NO || '-';
-                    const billName = bill.BILL_NAME || '-';
-                    const proposeDate = bill.PROPOSE_DT ? bill.PROPOSE_DT : '-';
-                    const proposer = bill.RST_PROPOSER || bill.PROPOSER || '-';
-                    const committee = bill.COMMITTEE || '-';
-                    
-                    tableHTML += `
-                        <a href="#" class="table-row" data-bill-id="${bill.BILL_ID}">
-                            <div class="bill-number">${billNo}</div>
-                            <div class="bill-title">${billName}</div>
-                            <div class="bill-date">${proposeDate}</div>
-                            <div class="bill-court">${proposer}</div>
-                            <div class="bill-status">${committee}</div>
-                        </a>
-                    `;
-                });
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                alert(`"${query}"에 대한 검색을 실행합니다.`);
             } else {
-                tableHTML += `
-                    <div class="no-results">
-                        검색 결과가 없습니다.
-                    </div>
-                `;
-            }
-
-            billsSection.innerHTML = tableHTML;
-
-            // 이벤트 리스너 추가
-            document.querySelectorAll('.table-row').forEach(row => {
-                row.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const billId = this.getAttribute('data-bill-id');
-                    const billTitle = this.querySelector('.bill-title').textContent;
-                    viewBillDetail(billId, billTitle);
-                });
-            });
-        }
-
-        // 데이터 로드
-        async function loadCurrentData() {
-            if (isLoading) return;
-            
-            isLoading = true;
-            showLoading();
-            
-            try {
-                const result = await fetchBills({
-                    committee: currentCommittee,
-                    searchTerm: currentSearchTerm,
-                    page: currentPage
-                });
-                
-                updateTable(result.bills);
-                updateStatusBar(result.totalCount);
-            } catch (error) {
-                console.error('데이터 로드 오류:', error);
-            } finally {
-                isLoading = false;
+                alert('검색어를 입력해주세요.');
             }
         }
 
-        // 로딩 표시
-        function showLoading() {
-            const billsSection = document.querySelector('.bills-section');
-            billsSection.innerHTML = `
-                <div class="table-header">
-                    <div>의안번호</div>
-                    <div>의안명</div>
-                    <div>제안일자</div>
-                    <div>제안자</div>
-                    <div>상임위원회</div>
-                </div>
-                <div class="loading-container">
-                    <div class="loading-spinner"></div>
-                    데이터를 불러오는 중입니다...
-                </div>
-            `;
-        }
-
-        // 상태 바 업데이트
-        function updateStatusBar(totalCount) {
-            const resultsCount = document.getElementById('resultsCount');
-            const currentFilter = document.getElementById('currentFilter');
-            
-            resultsCount.textContent = `총 ${totalCount}건의 법률안`;
-            
-            let filterText = '';
-            if (currentCommittee) {
-                filterText += `위원회: ${currentCommittee}`;
-            }
-            if (currentSearchTerm) {
-                if (filterText) filterText += ' | ';
-                filterText += `검색어: "${currentSearchTerm}"`;
-            }
-            
-            currentFilter.textContent = filterText;
-        }
-
-        // 이벤트 리스너 설정
-        document.addEventListener('DOMContentLoaded', function() {
-            // 위원회 카테고리 클릭 이벤트
-            document.querySelectorAll('.committee-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    document.querySelectorAll('.committee-item').forEach(el => {
-                        el.classList.remove('active');
-                    });
-                    
-                    this.classList.add('active');
-                    
-                    currentCommittee = this.getAttribute('data-committee');
-                    currentPage = 1;
-                    currentSearchTerm = '';
-                    document.querySelector('.search-input').value = '';
-                    
-                    loadCurrentData();
-                });
-            });
-
-            // 검색 기능
-            const searchInput = document.querySelector('.search-input');
-            const searchBtn = document.querySelector('.search-btn');
-
-            searchBtn.addEventListener('click', function() {
-                const searchTerm = searchInput.value.trim();
-                currentSearchTerm = searchTerm;
-                currentPage = 1;
-                loadCurrentData();
-            });
-
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    const searchTerm = this.value.trim();
-                    currentSearchTerm = searchTerm;
-                    currentPage = 1;
-                    loadCurrentData();
-                }
-            });
-
-            // 초기 로드
-            const allButton = document.querySelector('.committee-item[data-committee=""]');
-            if (allButton) {
-                allButton.classList.add('active');
-                loadCurrentData();
+        // Enter key support for search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
             }
         });
+
     </script>
 </body>
-</html>
