@@ -19,7 +19,7 @@
             line-height: 1.4;
         }
 
-        /* 헤더 - 법률안 페이지와 동일한 스타일로 업데이트 */
+        /* 헤더 - 메인 페이지와 동일한 패딩으로 수정 */
         .header {
             background: white;
             border-bottom: 1px solid #e9ecef;
@@ -28,7 +28,7 @@
             z-index: 100;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 16px 20px;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -261,6 +261,10 @@
                 grid-template-columns: 1fr 2fr 1.5fr 1fr 1.5fr 1fr;
                 padding: 15px 20px;
             }
+
+            .header {
+                padding: 16px 20px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -284,6 +288,10 @@
 
             .nav {
                 gap: 16px;
+            }
+
+            .nav-item {
+                font-size: 14px;
             }
 
             .header {
@@ -520,4 +528,4 @@
             console.log('입법제안 페이지 로드 완료');
         });
     </script>
-</body>
+</body></html>
